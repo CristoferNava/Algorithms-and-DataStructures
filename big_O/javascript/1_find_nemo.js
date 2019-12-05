@@ -14,4 +14,4 @@ function findNemo(array) {
     console.log(`${t1 - t0} milliseconds`);
 }
 
-findNemo(large);
+findNemo(large); // O(n)
