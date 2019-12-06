@@ -4,14 +4,14 @@ const names = ['cristofer', 'oliver', 'josue', 'monse', 'gerardo', 'pollo',
 const large = new Array(100000).fill('pollo')
 
 function findNemo(array) {
-    let t0 = performance.now();
-    for (let i = 0; i <= array.length - 1; i++) {
-        if (array[i] === 'nemo') {
-            console.log('We found Nemo!');
+    let t0 = performance.now(); // O(1)
+    for (let i = 0; i <= array.length - 1; i++) { // O(n)
+        if (array[i] === 'nemo') { // O(n)
+            console.log('We found Nemo!'); // O(n)
         }
     }
-    let t1 = performance.now();
-    console.log(`${t1 - t0} milliseconds`);
+    let t1 = performance.now(); // O(1)
+    console.log(`${t1 - t0} milliseconds`); // O(1)
 }
 
 findNemo(large); // O(n)
