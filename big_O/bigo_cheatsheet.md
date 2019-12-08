@@ -39,3 +39,13 @@
 **Rule 3:** Different inputs should have different variables. (n1 + n2) and for nested is (n1 * n2). *+* for steps in order. <i>*<i> for nested steps.
 
 **Rule 4:** Drop non-dominant terms.
+<hr>
+
+## What causes Space Complexity
+**Variables**
+
+**Data Structures**
+
+**Functions calls**
+
+**Allocations**
