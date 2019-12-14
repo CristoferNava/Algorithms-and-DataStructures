@@ -12,7 +12,3 @@ function insertionSort(array) {
   }
   return array;
 }
-
-let numbers = [1];
-insertionSort(numbers);
-console.log(numbers);
