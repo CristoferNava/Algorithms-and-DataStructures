@@ -1,4 +1,5 @@
 // Nonincreasing insertion-sort
+// Exercise 2.1-2
 
 function insertionSort(array) {
   let key;
