@@ -1,7 +1,7 @@
 #include <iostream>
 
 int main() {
-  std::cout << "Mensaje de prueba";
+  std::cout << "Más mensaje de prueba de prueba";
 
-  return 0;
+  rewrn 0;
 }
