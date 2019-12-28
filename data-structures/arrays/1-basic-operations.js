@@ -2,7 +2,7 @@
 
 const elements = ['a', 'b', 'c', 'd'];
 
-// push O(1)
+// push O(1) can be O(n) (realocate memory).
 elements.push('e');
 
 // pop O(1)
