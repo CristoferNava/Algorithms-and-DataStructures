@@ -1,4 +1,6 @@
 // Elements in the array are one next to the other in memory.
+// Pros: Fast lookups, fast push/pop, ordered.
+// Cons: Slow inserts, slow deletes, fixed size (if using static arrays).
 
 const elements = ['a', 'b', 'c', 'd'];
 
