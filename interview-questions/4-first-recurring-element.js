@@ -19,8 +19,19 @@ function firstRecurringElement(arr1) {
     arr2.push(arr1[i]);
   }
   return undefined;
-}
+} // Time: O(n^2)
+
+function firstRecurringElement2(arr) {
+  let map = {};
+  for (let i = 0; i < arr.length; i++) {
+    if (map[arr[i]] !== undefined) {
+      return arr[i];
+    } else {
+      map[arr[i]] = i;
+    }
+  }
+  return undefined;
+} // Time: O(n)
 
 let arr1 = [2, 3, 4, 5];
-console.log(firstRecurringElement(arr1));
-// Time Complexity: O(n^2)
+console.log(firstRecurringElement2(arr1));
