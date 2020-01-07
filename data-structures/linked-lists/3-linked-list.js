@@ -9,22 +9,21 @@ class LinkedList {
   constructor(value) {
     this.head = new Node(value);
     this.tail = this.head;
-    this.current = this.head;
     this.length = 1;
   }
 
   prepend(value) {
-    const node = new Node(value);
-    node.next = this.head;
-    this.head = node;
+    const newNode = new Node(value);
+    newNode.next = this.head;
+    this.head = newNode;
     this.length++;
     return this;
   }
 
   append(value) {
-    const node = new Node(value);
-    this.tail.next = node;
-    this.tail = node;
+    const newNode = new Node(value);
+    this.tail.next = newNode;
+    this.tail = newNode;
     this.length++;
     return this;
   }
@@ -88,11 +87,3 @@ class LinkedList {
     return listElements;
   }
 }
-
-let myLinkedList = new LinkedList(5);
-myLinkedList.append(7);
-myLinkedList.append(8);
-myLinkedList.append(4);
-console.log(myLinkedList.showList());
-myLinkedList.remove(0);
-console.log(myLinkedList.showList());
