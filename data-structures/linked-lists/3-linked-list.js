@@ -51,6 +51,25 @@ class LinkedList {
     return this;
   }
 
+  remove(index) {
+    if (index === 0) {
+      let holdingNode = this.head.next;
+      delete this.head;
+      this.head = holdingNode;
+      this.length--;
+      return this;
+    }
+    let currentNode = this.head;
+    for (let i = 1; i < index; i++) {
+      currentNode = currentNode.next;
+    }
+    let holdingNode = currentNode.next.next;
+    delete currentNode.next;
+    currentNode.next = holdingNode;
+    this.length--;
+    return this;
+  }
+
   search(index) {
     let currentNode = this.head;
     for (let i = 1; i <= index; i++) {
@@ -70,12 +89,10 @@ class LinkedList {
   }
 }
 
-let myLinkedList = new LinkedList(10);
-myLinkedList.append(5);
-myLinkedList.append(16);
-myLinkedList.prepend(1)
-myLinkedList.prepend(3);
+let myLinkedList = new LinkedList(5);
+myLinkedList.append(7);
+myLinkedList.append(8);
+myLinkedList.append(4);
 console.log(myLinkedList.showList());
-myLinkedList.insert(5, 11);
+myLinkedList.remove(0);
 console.log(myLinkedList.showList());
-console.log(myLinkedList.length);
