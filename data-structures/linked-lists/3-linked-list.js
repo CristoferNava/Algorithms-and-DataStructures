@@ -86,4 +86,27 @@ class LinkedList {
     }
     return listElements;
   }
+
+  reverse() {
+    let first = this.head;
+    this.tail = this.head;
+    let second = first.next;
+    while (second) {
+      const temp = second.next;
+      second.next = first;
+      first = second;
+      second = temp;
+    }
+    this.head.next = null;
+    this.head = first;
+  }
 }
+
+let myLinkedList = new LinkedList(7);
+myLinkedList.append(15);
+myLinkedList.append(2);
+myLinkedList.append(5);
+myLinkedList.append(3);
+myLinkedList.reverse();
+console.log(myLinkedList.showList());
+console.log(myLinkedList.head);

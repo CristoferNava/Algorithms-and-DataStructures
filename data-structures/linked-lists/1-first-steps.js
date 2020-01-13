@@ -8,6 +8,9 @@
 
 // A pointer is a reference to something in memory.
 
+// Pros: fast insertion, fast deletion, ordered, flexible size.
+// Cons: slow lookup, more memory.
+
 let obj1 = {burbi: 'pollito'};
 let obj2 = obj1;
 delete obj1;
