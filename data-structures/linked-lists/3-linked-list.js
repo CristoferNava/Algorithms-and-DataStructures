@@ -107,6 +107,5 @@ myLinkedList.append(15);
 myLinkedList.append(2);
 myLinkedList.append(5);
 myLinkedList.append(3);
-myLinkedList.reverse();
 console.log(myLinkedList.showList());
-console.log(myLinkedList.head);
+console.log(myLinkedList.search(4));

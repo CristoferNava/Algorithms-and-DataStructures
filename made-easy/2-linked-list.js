@@ -1,4 +1,4 @@
-// Inserts (append, prepend, random-location)
+// Inserts random-location
 
 class Node {
   constructor(data) {
@@ -28,8 +28,23 @@ class LinkedList {
     this.length++;
   }
 
-  insert(index) {
-
+  insert(data, index) {
+    if (index === 0) {
+      this.prepend(data);
+    }
+    if (index > this.length - 1) {
+      this.append(data);
+    }
+    
+    let currentNode = this.head;
+    for (let i = 1; i < index; i++) {
+      currentNode = currentNode.next;
+    }
+    let holdingNode = currentNode.next;
+    const node = new Node(data);
+    currentNode.next = node;
+    node.next = holdingNode;
+    this.length++;
   }
 
   search(index) {
@@ -53,10 +68,12 @@ class LinkedList {
   }
 }
 
-// 5, 7, 4, 1, 3
+// 5, 8, 2, 11, 3
 let linkedList = new LinkedList(5);
-linkedList.append(7);
-linkedList.prepend(2)
+linkedList.append(8);
+linkedList.append(2);
+linkedList.append(11);
+linkedList.append(3);
 console.log(linkedList.values());
-console.log(linkedList.length);
-console.log(linkedList.search(3).data);
+linkedList.insert(12, 4);
+console.log(linkedList.values());
