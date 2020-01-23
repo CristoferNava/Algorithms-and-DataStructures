@@ -1,4 +1,4 @@
-// Inserts random-location
+// Delete first node, last node, random node
 
 class Node {
   constructor(data) {
@@ -31,9 +31,11 @@ class LinkedList {
   insert(data, index) {
     if (index === 0) {
       this.prepend(data);
+      return;
     }
-    if (index > this.length - 1) {
+    if (index > this.length) {
       this.append(data);
+      return;
     }
     
     let currentNode = this.head;
@@ -45,6 +47,46 @@ class LinkedList {
     currentNode.next = node;
     node.next = holdingNode;
     this.length++;
+  }
+
+  // remove the first node
+  unshift() {
+    let currentNode = this.head.next;
+    delete this.head;
+    this.head = currentNode;
+    this.length--;
+  }
+
+  // remove the last node
+  pop() {
+    let currentNode = this.head;
+    for (let i = 1; i < this.length - 1; i++) {
+      currentNode = currentNode.next;
+    }
+    delete this.tail;
+    currentNode.next = null;
+    this.tail = currentNode;
+    this.length--;
+  }
+
+  remove(index) {
+    if (index === 0) {
+      this.unshift();
+      return;
+    }
+    if (index > this.length) {
+      this.pop();
+      return;
+    }
+
+    let currentNode = this.head;
+    for (let i = 1; i < index; i++) {
+      currentNode = currentNode.next;
+    }
+    let holdingNode = currentNode.next.next;
+    delete currentNode.next;
+    currentNode.next = holdingNode;
+    this.length--;
   }
 
   search(index) {
@@ -67,13 +109,3 @@ class LinkedList {
     return values;
   }
 }
-
-// 5, 8, 2, 11, 3
-let linkedList = new LinkedList(5);
-linkedList.append(8);
-linkedList.append(2);
-linkedList.append(11);
-linkedList.append(3);
-console.log(linkedList.values());
-linkedList.insert(12, 4);
-console.log(linkedList.values());
