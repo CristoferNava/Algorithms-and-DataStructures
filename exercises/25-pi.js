@@ -6,5 +6,3 @@ function estimatePi(n, i, sum) {
 
   return sum * 4;
 }
-
-console.log(estimatePi(1000, 0, 0));
