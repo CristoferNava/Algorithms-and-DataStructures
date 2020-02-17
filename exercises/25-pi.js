@@ -1,10 +1,10 @@
-function pi(n) {
-  let sum = 0;
-  for (let i = 0; i < n; i++) {
+function estimatePi(n, i, sum) {
+  if (i < n) {
     sum += ((-1)**i) / (2*i + 1);
+    return estimatePi(n, i + 1, sum);
   }
 
   return sum * 4;
 }
 
-console.log(pi(1000000));
+console.log(estimatePi(1000, 0, 0));
