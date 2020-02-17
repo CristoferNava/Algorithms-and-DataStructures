@@ -1,14 +1,10 @@
-let elements = [];
-
-function sameIndexElement(arr, pos, ele) {
+function sameIndexElement(arr, pos, elements) {
   if (arr.length !== pos) {
     if (arr[pos] === pos) {
       elements.push(pos);
     }
-    sameIndexElement(arr, pos + 1);
+    return sameIndexElement(arr, pos + 1, elements);
   }
-}
 
-let array = [12, 3, 2, 5, 11, 23, 6];
-sameIndexElement(array, 0);
-console.log(elements);
+  return elements;
+}
