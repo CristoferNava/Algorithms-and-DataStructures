@@ -1,4 +1,4 @@
 # Algorithms and Data Structures
 
-Material for the course of algorithms and data structures to get the interview.
-:alien:
+Big O, data structures, algorithms, problems and resources to be a better 
+software engineer :D
