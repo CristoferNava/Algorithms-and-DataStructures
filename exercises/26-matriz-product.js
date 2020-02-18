@@ -1,27 +1,28 @@
-function matrizProduct(matrizA, matrizB) {
-  let matrizC = [];
-  for (let i = 0; i < matrizA.length; i++) {
-    matrizC[i] = []
+function matrixProduct(matrixA, matrixB) {
+  let matrixC = [];
+  for (let i = 0; i < matrixA.length; i++) {
+    matrixC[i] = []
   }
   
-  for (let i = 0; i < matrizA.length; i++) {
-    for (let j = 0; j < matrizB.length; j++) {
+  // Cálculo del producto de las matrices
+  for (let i = 0; i < matrixA.length; i++) {
+    for (let j = 0; j < matrixB.length; j++) {
       let sum = 0;
-      for (let k = 0; k < matrizB.length; k++) {
-        sum += matrizA[i][k] * matrizB[k][j];
+      for (let k = 0; k < matrixB.length; k++) {
+        sum += matrixA[i][k] * matrixB[k][j];
       }
-      matrizC[i][j] = sum;
+      matrixC[i][j] = sum;
     }
   }
 
-  return matrizC;
+  return matrixC;
 }
 
-let matrizA = [[3, 1],
+let matrixA = [[3, 1],
                [4, 2],
                [1, 3]];
 
-let matrizB = [[7, 5],
+let matrixB = [[7, 5],
                [4, 1]];
 
-console.log(matrizProduct(matrizA, matrizB));
+console.log(matrixProduct(matrixA, matrixB));
