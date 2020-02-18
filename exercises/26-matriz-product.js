@@ -1,21 +1,21 @@
 function matrixProduct(matrixA, matrixB) {
-  let matrixC = [];
-  for (let i = 0; i < matrixA.length; i++) {
+  let matrixC = []; // O(1)
+  for (let i = 0; i < matrixA.length; i++) { // O(n)
     matrixC[i] = []
   }
   
   // Cálculo del producto de las matrices
-  for (let i = 0; i < matrixA.length; i++) {
-    for (let j = 0; j < matrixB.length; j++) {
+  for (let i = 0; i < matrixA.length; i++) { // O(n)
+    for (let j = 0; j < matrixB.length; j++) { // O(m) --> O(m * n)
       let sum = 0;
-      for (let k = 0; k < matrixB.length; k++) {
+      for (let k = 0; k < matrixB.length; k++) { // O(m) --> O(m * m * n)
         sum += matrixA[i][k] * matrixB[k][j];
       }
       matrixC[i][j] = sum;
     }
   }
 
-  return matrixC;
+  return matrixC; // O(1)
 }
 
 let matrixA = [[3, 1],
@@ -25,4 +25,11 @@ let matrixA = [[3, 1],
 let matrixB = [[7, 5],
                [4, 1]];
 
-console.log(matrixProduct(matrixA, matrixB));
+// Time Complexity: m^2 * n + c => O(m^2 * n + c)
+// Tomando en cuenta sólo el término mayor: O(m^2 * n)
+
+// Peor caso: El programa ejecuta todas los procesos independiente del tamaño de
+// las matrices por lo que O(m^2 * n)
+
+// Mejor caso: El programa ejecuta todas los procesos independiente del tamaño de
+// las matrices por lo que O(m^2 * n)
