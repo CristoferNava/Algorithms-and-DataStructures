@@ -16,3 +16,4 @@ let array = [0, 23, 22, 3, 12, 15, 6]
 // la propiedad de que su valor es el mismo que su posición (índice) del arreglo.
 
 let sameIndexElements = sameIndexElement(array, 0, []);
+console.log(sameIndexElements);
