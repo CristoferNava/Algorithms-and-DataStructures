@@ -13,7 +13,10 @@ class Stack {
   }
 
   peek() {
-    return this.top.value;
+    if (this.top) {
+      return this.top.value;
+    }
+    return this.top;
   }
 
   push(value) {
@@ -33,11 +36,4 @@ class Stack {
 }
 
 let myStack = new Stack();
-myStack.push("Js");
-myStack.push("Python");
-myStack.push("Java");
-console.log(myStack.peek());
-myStack.pop();
-console.log(myStack.peek());
-myStack.pop();
 console.log(myStack.peek());
