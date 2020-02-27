@@ -24,26 +24,25 @@ class Queue {
     if (this.length === 0) {
       this.first = node;
       this.last = node;
-      this.length++;
-      return;
+    } else {
+      this.last.next = node;
+      this.last = node;
     }
-    this.last.next = node;
-    this.last = node;
     this.length++;
   }
 
   dequeue() {
-    const temp = this.first;
-    delete this.first;
-    this.first = temp.next;
+    this.first = this.first.next; // the reference gets lose and the garbage collector manages it
+    this.length--;
   }
-    
 }
 
 const myQueue = new Queue();
-myQueue.enqueue("Cristofer");
-myQueue.enqueue("Ilse");
-myQueue.enqueue("Dai");
+myQueue.enqueue("Js");
+myQueue.enqueue("Python");
+myQueue.enqueue("Java");
+myQueue.dequeue();
+myQueue.enqueue("Pollo")
 myQueue.dequeue();
 myQueue.dequeue();
 console.log(myQueue.peek());
