@@ -1,4 +1,6 @@
 // Implementación de Linked List con métodos de agregar, remover y mostrar
+// link para probar el código online:
+// https://repl.it/@CristoferNava/linked-list-implementation
 
 // Definición de la clase persona
 class Person {
