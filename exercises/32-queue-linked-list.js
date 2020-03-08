@@ -5,6 +5,8 @@ class Node {
   }
 }
 
+//  A ---> B ---> C ---> D
+// head                  tail
 class Queue {
   constructor(data) {
     const node = new Node(data);
@@ -21,13 +23,13 @@ class Queue {
   }
   
   pop() {
-    const firstNode = this.head;
+    const firstNodeData = this.head.data;
     this.head = this.head.next;
     this.length--;
-    return firstNode.data;
+    return firstNodeData;
   } 
 
-  showList() {
+  showQueue() {
     let currentNode = this.head;
     while (currentNode) {
       console.log(currentNode.data);
@@ -39,13 +41,13 @@ class Queue {
 const myQueue = new Queue('Cristofer');
 myQueue.push('Damaris');
 myQueue.push('Nestor');
-myQueue.showList();
+myQueue.showQueue();
 
 myQueue.pop();
 myQueue.pop();
 console.log();
-myQueue.showList();
+myQueue.showQueue();
 
 myQueue.push("Alfonso");
 console.log();
-myQueue.showList();
+myQueue.showQueue();
