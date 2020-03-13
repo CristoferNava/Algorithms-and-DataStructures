@@ -1,16 +1,15 @@
-// Implementación de pila con Linked List
-// Link para probar el código:
-// https://repl.it/@CristoferNava/stack-implementation
+// Implementación de pila usando Doubly Linked List
+// Link para probar el código;
+// https://repl.it/@CristoferNava/stack-doubly-linked-list
 
 class Node {
   constructor(data) {
     this.data = data;
     this.next = null;
+    this.prev = null
   }
 }
 
-//  D ---> C ---> B ---> A
-// tail                 head     
 class Stack {
   constructor(data) {
     const node = new Node(data);
@@ -21,20 +20,22 @@ class Stack {
 
   push(data) {
     const node = new Node(data);
-    node.next = this.tail;
+    this.tail.next = node;
+    node.prev = this.tail;
     this.tail = node;
-    this.length--;
+    this.length++;
   }
 
   pop() {
-    const lastNodeData = this.tail.data;
-    this.tail = this.tail.next;
+    const dataNode = this.tail.data;
+    this.tail = this.tail.prev;
+    delete this.tail.next;
     this.length--;
-    return lastNodeData;
+    return dataNode;
   }
 
   showStack() {
-    let currentNode = this.tail;
+    let currentNode = this.head;
     while (currentNode) {
       console.log(currentNode.data);
       currentNode = currentNode.next;
@@ -43,8 +44,8 @@ class Stack {
 }
 
 const myStack = new Stack('Cristofer');
-myStack.push('Oliver');
-myStack.push('Alfonso');
+myStack.push('Nestor');
+myStack.push('Damaris');
 myStack.showStack();
 console.log();
 

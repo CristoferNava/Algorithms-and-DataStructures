@@ -1,16 +1,15 @@
-// Implementación de cola con Linked List
+// Implementación de una cola usando Doubly Linked List
 // Link para probar el código:
-// https://repl.it/@CristoferNava/queue-implementation
+// https://repl.it/@CristoferNava/queue-doubly-linked-list
 
 class Node {
   constructor(data) {
     this.data = data;
     this.next = null;
+    this.prev = null;
   }
 }
 
-//  A ---> B ---> C ---> D
-// head                  tail
 class Queue {
   constructor(data) {
     const node = new Node(data);
@@ -22,16 +21,18 @@ class Queue {
   push(data) {
     const node = new Node(data);
     this.tail.next = node;
+    node.prev = this.tail;
     this.tail = node;
-    this.length--;
+    this.length++;
   }
-  
+
   pop() {
-    const firstNodeData = this.head.data;
+    const dataNode = this.head.data;
     this.head = this.head.next;
+    delete this.head.prev;
     this.length--;
-    return firstNodeData;
-  } 
+    return dataNode;
+  }
 
   showQueue() {
     let currentNode = this.head;
@@ -43,15 +44,10 @@ class Queue {
 }
 
 const myQueue = new Queue('Cristofer');
-myQueue.push('Damaris');
 myQueue.push('Nestor');
+myQueue.push('Damaris');
 myQueue.showQueue();
+console.log();
 
 myQueue.pop();
-myQueue.pop();
-console.log();
-myQueue.showQueue();
-
-myQueue.push("Alfonso");
-console.log();
 myQueue.showQueue();
