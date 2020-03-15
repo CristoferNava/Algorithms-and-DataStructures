@@ -83,6 +83,57 @@ class CircularLinkedList {
     return false;
   }
 
+  remove(data) {
+    if (data === this.min.data) {
+      this.min.next.prev = this.max;
+      this.max.next = this.min.next;
+      this.min = this.min.next;
+      this.length--;
+      return true;
+    }
+
+    if (data === this.start.data) {
+      this.start.prev.next = this.start.next;
+      this.start.next.prev = this.start.prev;
+      this.start = this.start.next;
+      this.length--;
+      return true;
+    }
+
+    if (data === this.max.data) {
+      this.max.prev.next = this.min;
+      this.min.prev = this.max.prev;
+      this.max = this.max.prev;
+      this.length--;
+      return true;
+    }
+
+    let currentNode = this.start;
+    if (data > this.start.data) {
+      while (currentNode !== this.max) {
+        currentNode = currentNode.next;
+        if (currentNode.data === data) {
+          currentNode.prev.next = currentNode.next;
+          currentNode.next.prev = currentNode.prev;
+          this.length--;
+          return true;
+        }
+      }
+    } else {
+      while (currentNode !== this.min) {
+        currentNode = currentNode.prev;
+        if (currentNode.data === data) {
+          currentNode.prev.next = currentNode.next;
+          currentNode.next.prev = currentNode.prev;
+          this.length--;
+          return true;
+        }
+      }
+    }
+
+    return false
+  }
+
   showList() {
     let currentNode = this.min;
     for (let i = 0; i < this.length; i++) {
@@ -106,5 +157,5 @@ const myCircularLinkedList = new CircularLinkedList(8);
 for (let i = 1; i < numbers.length; i++) {
   myCircularLinkedList.add(numbers[i]);
 }
-test = myCircularLinkedList.search(0);
-console.log(test);
+
+console.log();
