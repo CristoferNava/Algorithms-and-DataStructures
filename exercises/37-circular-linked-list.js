@@ -134,6 +134,19 @@ class CircularLinkedList {
     return false
   }
 
+  update(dataToRemove, dataToAdd) {
+    const condition1 = this.search(dataToRemove);
+    const condition2 = this.search(dataToAdd);
+
+    if (condition1 && condition2) {
+      this.remove(dataToRemove);
+      this.add(dataToAdd);
+      return true;
+    }
+
+    return false;
+  }
+
   showList() {
     let currentNode = this.min;
     for (let i = 0; i < this.length; i++) {
