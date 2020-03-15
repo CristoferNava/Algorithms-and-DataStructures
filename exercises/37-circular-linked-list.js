@@ -60,6 +60,29 @@ class CircularLinkedList {
     this.length++;
   }
 
+  search(data) {
+    if (data === this.min.data) return true;
+
+    if (data === this.start.data) return true;
+
+    if (data === this.max.data) return true;
+
+    let currentNode = this.start;
+    if (data < this.start.data) {
+      while (currentNode !== this.min) {
+        currentNode = currentNode.prev;
+        if (currentNode.data === data) return true;
+      }
+    } else {
+      while (currentNode !== this.max.data) {
+        currentNode = currentNode.next;
+        if (currentNode.data === data) return true;
+      }
+    }
+
+    return false;
+  }
+
   showList() {
     let currentNode = this.min;
     for (let i = 0; i < this.length; i++) {
@@ -80,13 +103,8 @@ class CircularLinkedList {
 const numbers = [8, 5, 11, 13, 2, 4, 6];
 
 const myCircularLinkedList = new CircularLinkedList(8);
-myCircularLinkedList.add(5);
-myCircularLinkedList.add(11);
-myCircularLinkedList.add(13);
-myCircularLinkedList.add(2);
-myCircularLinkedList.add(4);
-myCircularLinkedList.add(6);
-myCircularLinkedList.add(3);
-myCircularLinkedList.showList();
-console.log();
-console.log(myCircularLinkedList.minValue());
+for (let i = 1; i < numbers.length; i++) {
+  myCircularLinkedList.add(numbers[i]);
+}
+test = myCircularLinkedList.search(0);
+console.log(test);
