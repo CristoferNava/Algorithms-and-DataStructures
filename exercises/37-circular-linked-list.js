@@ -59,6 +59,7 @@ class CircularLinkedList {
       }
     }
     this.length++;
+    return true;
   }
 
   search(data) {
@@ -136,13 +137,9 @@ class CircularLinkedList {
   }
 
   update(dataToRemove, dataToAdd) {
-    const condition1 = this.search(dataToRemove);
-
-    if (condition1) {
-      this.remove(dataToRemove);
-      this.add(dataToAdd);
-      return true;
-    }
+    if (this.remove(dataToRemove)) {
+      this.add(dataToAdd)
+    };
 
     return false;
   }
