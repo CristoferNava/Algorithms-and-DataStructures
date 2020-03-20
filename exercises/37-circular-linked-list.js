@@ -18,16 +18,16 @@ class CircularLinkedList {
   add(data) {
     const newNode = new Node(data);
 
-    // To the right
+    // we move to the right
     if (newNode.data > this.start.data) {
-      // At the end
+      // at the end (replace max)
       if (newNode.data > this.max.data) {
         this.max.next = newNode;
         newNode.prev = this.max;
         newNode.next = this.min;
         this.max = newNode;
         this.min.prev = this.max;
-      } else { // Between
+      } else { // between start and max
         let currentNode = this.start;
         while(newNode.data > currentNode.data) {
           currentNode = currentNode.next;
@@ -38,19 +38,20 @@ class CircularLinkedList {
         currentNode.prev.next = newNode;
         currentNode.prev = newNode;
       }
-    } else { // To the left
-      // at the begining
+    } else { // we move to the left
+      // at the begining (replace min)
       if (newNode.data < this.min.data) {
         this.min.prev = newNode;
         newNode.prev = this.max;
         newNode.next = this.min;
         this.min = newNode;
         this.max.next = this.min;
-      } else { // in between
+      } else { // between min and start
         let currentNode = this.start;
         while (newNode.data < currentNode.data) {
           currentNode = currentNode.prev;
         }
+        // CurrentNode is to the left of the newNode to insert
         newNode.prev = currentNode;
         newNode.next = currentNode.next;
         currentNode.next.prev = newNode;
@@ -136,9 +137,8 @@ class CircularLinkedList {
 
   update(dataToRemove, dataToAdd) {
     const condition1 = this.search(dataToRemove);
-    const condition2 = this.search(dataToAdd);
 
-    if (condition1 && condition2) {
+    if (condition1) {
       this.remove(dataToRemove);
       this.add(dataToAdd);
       return true;
@@ -165,10 +165,12 @@ class CircularLinkedList {
 }
 
 const numbers = [8, 5, 11, 13, 2, 4, 6];
-
+const test = [2, 1]
 const myCircularLinkedList = new CircularLinkedList(8);
 for (let i = 1; i < numbers.length; i++) {
   myCircularLinkedList.add(numbers[i]);
 }
 
-console.log();
+const testLinkedList = new CircularLinkedList(2);
+testLinkedList.add(1);
+testLinkedList.showList()
