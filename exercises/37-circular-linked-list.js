@@ -1,3 +1,6 @@
+// Link para probar el código
+// https://repl.it/@CristoferNava/circular-linked-list
+
 class Node {
   constructor(data) {
     this.data = data;
@@ -161,13 +164,34 @@ class CircularLinkedList {
   }
 }
 
+// Números que queremos agregar a la lista
 const numbers = [8, 5, 11, 13, 2, 4, 6];
-const test = [2, 1]
-const myCircularLinkedList = new CircularLinkedList(8);
+
+// Creamos la lista, el constructor de la lista recibe un número (primer nodo)
+// por ello pasamos el primer número de numbers
+const myCircularLinkedList = new CircularLinkedList(numbers[0]);
+
+// Añadimos los números restantes a lista
 for (let i = 1; i < numbers.length; i++) {
   myCircularLinkedList.add(numbers[i]);
 }
+// Verificamos que el método add funcione:
+myCircularLinkedList.showList();
+console.log(); // Imprimir un espacio en blanco
 
-const testLinkedList = new CircularLinkedList(2);
-testLinkedList.add(1);
-testLinkedList.showList()
+// Eliminamos un número de la lista
+myCircularLinkedList.remove(11)
+// Verificamos que el método remove funcione
+myCircularLinkedList.showList();
+console.log();
+
+// Actualizamos un número en la lista
+myCircularLinkedList.update(5, 3)
+// Verificamos que el método update funcione
+myCircularLinkedList.showList()
+console.log()
+
+// Buscamos un número en la lista
+const exits = myCircularLinkedList.search(2)
+// Verificamos que el método search funcione
+console.log(exits)
