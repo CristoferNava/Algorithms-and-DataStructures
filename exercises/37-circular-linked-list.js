@@ -192,6 +192,6 @@ myCircularLinkedList.showList()
 console.log()
 
 // Buscamos un número en la lista
-const exits = myCircularLinkedList.search(2)
+const exists = myCircularLinkedList.search(2)
 // Verificamos que el método search funcione
-console.log(exits)
+console.log(exists)
