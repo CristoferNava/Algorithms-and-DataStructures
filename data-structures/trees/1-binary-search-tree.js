@@ -1,3 +1,6 @@
+// Link para probar el código:
+// https://repl.it/@CristoferNava/binary-search-tree
+
 class Node {
   constructor(data) {
     this.data = data;
@@ -53,25 +56,17 @@ class BinarySearchTree {
 
   search(data) {
     let currentNode = this.root;
-    if (data === this.root.data) {
-      return true;
-    }
-
     while (true) {
-      // to the left
+      if (data === currentNode.data) return true;
+  
+      // less than
       if (data < currentNode.data) {
-        currentNode = currentNode.left;
-        if (currentNode.data === data) return true;
-        continue;
+        if (currentNode.left) currentNode = currentNode.left; 
+        else return false;
+      } else { // greater than
+        if (currentNode.right) currentNode = currentNode.right;
+        else return false;
       }
-
-      // to the right
-      if (data > currentNode.data) {
-        currentNode = currentNode.right;
-        if (currentNode.data === data) return true;
-      }
-
-      return false;
     }
   }
 }
@@ -88,4 +83,4 @@ myTree.insert(6);
 myTree.insert(18);
 myTree.insert(170);
 
-console.log(myTree.root.right.right.data);
+console.log(myTree.search(0));
