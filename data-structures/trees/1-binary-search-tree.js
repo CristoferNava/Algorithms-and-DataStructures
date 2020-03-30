@@ -56,18 +56,14 @@ class BinarySearchTree {
 
   search(data) {
     let currentNode = this.root;
-    while (true) {
+    while (currentNode) {
       if (data === currentNode.data) return true;
   
-      // less than
-      if (data < currentNode.data) {
-        if (currentNode.left) currentNode = currentNode.left; 
-        else return false;
-      } else { // greater than
-        if (currentNode.right) currentNode = currentNode.right;
-        else return false;
-      }
+      if (data < currentNode.data) currentNode = currentNode.left;
+      else currentNode = currentNode.right;
     }
+
+    return false;
   }
 }
 
@@ -83,4 +79,4 @@ myTree.insert(6);
 myTree.insert(18);
 myTree.insert(170);
 
-console.log(myTree.search(0));
+console.log(myTree.search(170));
