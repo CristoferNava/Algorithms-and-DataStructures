@@ -47,11 +47,11 @@ class BinarySearchTree {
 
         // if there's a node to the right
         currentNode = currentNode.right;
+        continue;
       }
+      // if the node to insert already exists
+      return false;
     }
-
-    // if the node to insert already exists
-    return false;
   }
 
   search(data) {
@@ -77,6 +77,6 @@ myTree.insert(20);
 myTree.insert(1);
 myTree.insert(6);
 myTree.insert(18);
-myTree.insert(170);
+myTree.insert(44);
 
-console.log(myTree.search(170));
+console.log(myTree.insert(170));
