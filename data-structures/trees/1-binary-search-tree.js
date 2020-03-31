@@ -81,6 +81,28 @@ class BinarySearchTree {
         nodeToRemove.parent.right = nodeToRemove.right;
       }
     }
+
+    // third case. Two childs
+    if (nodeToRemove.left && nodeToRemove.right) {
+      // buscamos el nodo más a la izquierda
+      let leftMostNode = nodeToRemove.right;
+      while (leftMostNode.left) {
+        leftMostNode = leftMostNode.left;
+      }
+
+      leftMostNode.parent.left = leftMostNode.right
+      leftMostNode.right.parent = leftMostNode.parent;
+
+      leftMostNode.parent = nodeToRemove.parent;
+      nodeToRemove.parent.left = leftMostNode;
+
+      leftMostNode.left = nodeToRemove.left;
+      nodeToRemove.left.parent = leftMostNode;
+      leftMostNode.right = nodeToRemove.right;
+      nodeToRemove.right.parent = leftMostNode;
+
+      // nodeToRemove.parentElement = nodeToRemove.left = nodeToRemove.right = null;
+    }
   }
 
   search(data) {
@@ -99,16 +121,24 @@ class BinarySearchTree {
 //        9 
 //   4         20
 // 1   6     18  170
-//      8
 const myTree = new BinarySearchTree();
-myTree.insert(9);
-myTree.insert(4);
+myTree.insert(50);
+myTree.insert(15);
+myTree.insert(2);
+myTree.insert(40);
+myTree.insert(30);
 myTree.insert(20);
-myTree.insert(1);
-myTree.insert(6);
-myTree.insert(18);
-myTree.insert(170);
-myTree.insert(8);
+myTree.insert(28);
+myTree.insert(25);
+myTree.insert(29);
 
-myTree.remove(6);
-console.log(myTree.root.left);
+myTree.remove(15);
+console.log(JSON.stringify(traverse(myTree.root)));
+// console.log(myTree.root.left.right.left.left);
+
+function traverse(node) {
+  const tree = { value: node.data };
+  tree.left = node.left === null ? null : traverse(node.left);
+  tree.right = node.right === null ? null : traverse(node.right);
+  return tree;
+}
