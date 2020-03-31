@@ -90,6 +90,17 @@ class BinarySearchTree {
         leftMostNode = leftMostNode.left;
       }
 
+      // si el nodo a la derecha de nodeToRemove no tiene nodos a la izquierda
+      if (leftMostNode === nodeToRemove.right) {
+        console.log('No hay nodos a la izquierda :0');
+        leftMostNode.parent = nodeToRemove.parent;
+        nodeToRemove.parent.left = leftMostNode;
+
+        nodeToRemove.left.parent = leftMostNode;
+        leftMostNode.left = nodeToRemove.left;
+        return;
+      }
+
       leftMostNode.parent.left = leftMostNode.right
       leftMostNode.right.parent = leftMostNode.parent;
 
@@ -100,8 +111,6 @@ class BinarySearchTree {
       nodeToRemove.left.parent = leftMostNode;
       leftMostNode.right = nodeToRemove.right;
       nodeToRemove.right.parent = leftMostNode;
-
-      // nodeToRemove.parentElement = nodeToRemove.left = nodeToRemove.right = null;
     }
   }
 
@@ -126,11 +135,6 @@ myTree.insert(50);
 myTree.insert(15);
 myTree.insert(2);
 myTree.insert(40);
-myTree.insert(30);
-myTree.insert(20);
-myTree.insert(28);
-myTree.insert(25);
-myTree.insert(29);
 
 myTree.remove(15);
 console.log(JSON.stringify(traverse(myTree.root)));
