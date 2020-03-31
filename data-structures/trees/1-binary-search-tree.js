@@ -6,6 +6,7 @@ class Node {
     this.data = data;
     this.left = null;
     this.right = null;
+    this.parent = null;
   }
 }
 
@@ -30,6 +31,7 @@ class BinarySearchTree {
         // if there's not node to the leff
         if (currentNode.left === null) {
           currentNode.left = newNode;
+          newNode.parent = currentNode;
           return true;
         }
         // if there's a node to the left
@@ -37,11 +39,12 @@ class BinarySearchTree {
         continue;
       }
 
-      // to the left
+      // to the right
       if (newNode.data > currentNode.data) {
         // if there's not a node to the left
         if (currentNode.right === null) {
           currentNode.right = newNode;
+          newNode.parent = currentNode;
           return true;;
         }
 
@@ -77,6 +80,6 @@ myTree.insert(20);
 myTree.insert(1);
 myTree.insert(6);
 myTree.insert(18);
-myTree.insert(44);
+myTree.insert(170);
 
-console.log(myTree.insert(170));
+console.log(myTree.root.right.right.parent.data);
