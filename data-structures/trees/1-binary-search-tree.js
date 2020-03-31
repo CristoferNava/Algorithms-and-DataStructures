@@ -57,10 +57,23 @@ class BinarySearchTree {
     }
   }
 
+  remove(data) {
+    const nodeToRemove = this.search(data);
+    // first case. No children
+    if (!nodeToRemove.left && !nodeToRemove.right) {
+      // we check if it's the left or the right node
+      if (nodeToRemove.parent.left === nodeToRemove) {
+        nodeToRemove.parent.left = null;
+      } else {
+        nodeToRemove.parent.right = null;
+      } 
+    }
+  }
+
   search(data) {
     let currentNode = this.root;
     while (currentNode) {
-      if (data === currentNode.data) return true;
+      if (data === currentNode.data) return currentNode;
   
       if (data < currentNode.data) currentNode = currentNode.left;
       else currentNode = currentNode.right;
@@ -82,4 +95,4 @@ myTree.insert(6);
 myTree.insert(18);
 myTree.insert(170);
 
-console.log(myTree.root.right.right.parent.data);
+myTree.remove(170);
