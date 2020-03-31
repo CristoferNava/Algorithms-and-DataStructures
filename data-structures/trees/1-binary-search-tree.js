@@ -68,6 +68,19 @@ class BinarySearchTree {
         nodeToRemove.parent.right = null;
       } 
     }
+
+    // second case. One child
+    // comprobamos que tenga uno, y sólo un hijo
+    if (!nodeToRemove.left ^ !nodeToRemove.right) {
+      // revisamos si el hijo de nodeToRemove es el izquierdo o el derecho
+      if (nodeToRemove.left) {
+        nodeToRemove.left.parent = nodeToRemove.parent;
+        nodeToRemove.parent.left = nodeToRemove.left;
+      } else {
+        nodeToRemove.right.parent = nodeToRemove.parent;
+        nodeToRemove.parent.right = nodeToRemove.right;
+      }
+    }
   }
 
   search(data) {
@@ -83,9 +96,10 @@ class BinarySearchTree {
   }
 }
 
-//       9 
-//   4      20
-// 1   6  18   170
+//        9 
+//   4         20
+// 1   6     18  170
+//      8
 const myTree = new BinarySearchTree();
 myTree.insert(9);
 myTree.insert(4);
@@ -94,5 +108,7 @@ myTree.insert(1);
 myTree.insert(6);
 myTree.insert(18);
 myTree.insert(170);
+myTree.insert(8);
 
-myTree.remove(170);
+myTree.remove(6);
+console.log(myTree.root.left);
