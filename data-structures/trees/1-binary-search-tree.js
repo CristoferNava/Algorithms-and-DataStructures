@@ -90,9 +90,8 @@ class BinarySearchTree {
         leftMostNode = leftMostNode.left;
       }
 
-      // si el nodo a la derecha de nodeToRemove no tiene nodos a la izquierda
+      // revisamos si el nodo a la derecha de nodeToRemove no tiene nodos a la izquierda
       if (leftMostNode === nodeToRemove.right) {
-        console.log('No hay nodos a la izquierda :0');
         leftMostNode.parent = nodeToRemove.parent;
         nodeToRemove.parent.left = leftMostNode;
 
@@ -127,9 +126,6 @@ class BinarySearchTree {
   }
 }
 
-//        9 
-//   4         20
-// 1   6     18  170
 const myTree = new BinarySearchTree();
 myTree.insert(50);
 myTree.insert(15);
@@ -137,12 +133,13 @@ myTree.insert(2);
 myTree.insert(40);
 
 myTree.remove(15);
-console.log(JSON.stringify(traverse(myTree.root)));
-// console.log(myTree.root.left.right.left.left);
 
+// Ignorar esto
+// Función para mostrar de forma más gráfica el arbol
 function traverse(node) {
   const tree = { value: node.data };
   tree.left = node.left === null ? null : traverse(node.left);
   tree.right = node.right === null ? null : traverse(node.right);
   return tree;
 }
+// ˆ.log(JSON.stringify(traverse(myTree.root)));
