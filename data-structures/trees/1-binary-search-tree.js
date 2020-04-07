@@ -124,6 +124,30 @@ class BinarySearchTree {
 
     return false;
   }
+
+  inOrderTraversal(node) {
+    if (node) {
+      this.inOrderTraversal(node.left);
+      console.log(node.data);
+      this.inOrderTraversal(node.right);
+    }
+  }
+
+  preOrderTraversal(node) {
+    if (node) {
+      console.log(node.data);
+      this.preOrderTraversal(node.left);
+      this.preOrderTraversal(node.right);
+    }
+  }
+
+  postOrderTraversal(node) {
+    if (node) {
+      this.postOrderTraversal(node.left);
+      this.postOrderTraversal(node.right);
+      console.log(node.data);
+    }
+  }
 }
 
 const myTree = new BinarySearchTree();
@@ -131,8 +155,13 @@ myTree.insert(50);
 myTree.insert(15);
 myTree.insert(2);
 myTree.insert(40);
+myTree.insert(11);
+myTree.insert(27);
+myTree.insert(21);
+myTree.insert(68);
 
-myTree.remove(15);
+myTree.inOrderTraversal(myTree.root);
+
 
 // Ignorar esto
 // Función para mostrar de forma más gráfica el arbol
