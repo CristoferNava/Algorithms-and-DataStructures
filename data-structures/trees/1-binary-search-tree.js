@@ -151,14 +151,15 @@ class BinarySearchTree {
 }
 
 const myTree = new BinarySearchTree();
-myTree.insert(50);
+myTree.insert(70);
 myTree.insert(15);
-myTree.insert(2);
-myTree.insert(40);
-myTree.insert(11);
-myTree.insert(27);
-myTree.insert(21);
-myTree.insert(68);
+myTree.insert(85);
+myTree.insert(10);
+myTree.insert(15);
+myTree.insert(75);
+myTree.insert(100);
+myTree.insert(20);
+myTree.insert(45);
 
 myTree.inOrderTraversal(myTree.root);
 
