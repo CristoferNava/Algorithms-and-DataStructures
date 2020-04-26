@@ -13,6 +13,7 @@ function bubbleSort(array) {
   return array;
 }
 
+// In bubble sort we compare the current element (i) with the next one (i+1), and we swap them
 const myArray = [99, 44, 6, 2, 1, 5, 63, 87, 283, 4, 0];
 const myArray2 = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
 
