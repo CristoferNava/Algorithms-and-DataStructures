@@ -113,6 +113,7 @@ class BinarySearchTree {
     }
   }
 
+  // O(log N) in a balanced BST
   search(data) {
     let currentNode = this.root;
     while (currentNode) {
