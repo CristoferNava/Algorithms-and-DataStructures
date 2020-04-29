@@ -161,8 +161,8 @@ myTree.insert(100);
 myTree.insert(20);
 myTree.insert(45);
 
-myTree.inOrderTraversal(myTree.root);
-
+console.log(myTree.search(70).data);
+console.log(myTree.search(17).data);
 
 // Ignorar esto
 // Función para mostrar de forma más gráfica el arbol
