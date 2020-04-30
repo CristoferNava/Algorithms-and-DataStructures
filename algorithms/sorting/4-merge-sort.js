@@ -33,7 +33,9 @@ function merge(left, right) {
 }
 
 const arr1 = [4, 3, 2, 1];
-const arr2 = [5, 4, 3, 2, 1];
+const arr2 = [-5, 4, 3, 2, 1];
+const arr3 = [2, 8, 5, 3, 9, 4, 1, 7];
 
 console.log(mergeSort(arr1));
 console.log(mergeSort(arr2));
+console.log(mergeSort(arr3));
