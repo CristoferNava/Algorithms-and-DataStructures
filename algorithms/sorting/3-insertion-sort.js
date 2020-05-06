@@ -16,4 +16,5 @@ function insertionSort(arr) {
 const arr1 = [4, 2, 1, 12, 0];
 const arr2 = [5, 4, 3, 2, 1];
 
-console.log(insertionSort(arr2));
+insertionSort(arr1);
+console.log(arr1);
