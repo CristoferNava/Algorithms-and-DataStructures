@@ -83,8 +83,6 @@ class BinarySearchTree {
       } 
       // en este caso no tenemos que cambiar niveles de ningún nodo, puesto que 
       // el nodo eliminado no tiene hijos
-      // con el método maxHeight recorremos el arbol en busca del mel mayor level
-      this.maxHeight(this.root);
     }
 
     // second case. One child
@@ -94,9 +92,11 @@ class BinarySearchTree {
       // En este caso el nodo hijo del nodo eliminado pasa a ocupar su lugar y por
       // lo tanto también que cambia su nivel (ahora debe tener el nivel del padre eliminado)
       if (nodeToRemove.left) {
+        nodeToRemove.left.level = nodeToRemove.level; // Cambiamos el nivel del nodo
         nodeToRemove.left.parent = nodeToRemove.parent;
         nodeToRemove.parent.right = nodeToRemove.left;
       } else {
+        nodeToRemove.right.level = nodeToRemove.level; // Cambiamos el nivel del nodo
         nodeToRemove.right.parent = nodeToRemove.parent;
         nodeToRemove.parent.left = nodeToRemove.right;
       }
@@ -132,6 +132,8 @@ class BinarySearchTree {
       leftMostNode.right = nodeToRemove.right;
       nodeToRemove.right.parent = leftMostNode;
     }
+
+    this.maxHeight(this.root);
   }
 
   // O(log N) in a balanced BST
@@ -147,7 +149,7 @@ class BinarySearchTree {
     return false;
   }
 
-  inOrderTraversal(node) {
+  static inOrderTraversal(node) {
     if (node) {
       this.inOrderTraversal(node.left);
       console.log(`value=${node.data} level=${node.level}`);
@@ -188,12 +190,11 @@ myTree.insert(15);
 myTree.insert(7);
 myTree.insert(12);
 myTree.insert(20);
-myTree.insert(100);
 
+BinarySearchTree.inOrderTraversal(myTree.root);
+console.log();
 myTree.remove(5);
-console.log(myTree.root.left.data);
-
-
+BinarySearchTree.inOrderTraversal(myTree.root);
 // Ignorar esto
 // Función para mostrar de forma más gráfica el arbol
 function traverse(node) {
