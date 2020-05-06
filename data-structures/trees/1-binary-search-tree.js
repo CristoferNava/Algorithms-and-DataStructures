@@ -71,6 +71,7 @@ class BinarySearchTree {
   }
 
   remove(data) {
+    this.heightAfterRemove = 0;
     const nodeToRemove = this.search(data);
     // first case. No children
     if (!nodeToRemove.left && !nodeToRemove.right) {
@@ -80,19 +81,26 @@ class BinarySearchTree {
       } else {
         nodeToRemove.parent.right = null;
       } 
+      // en este caso no tenemos que cambiar niveles de ningún nodo, puesto que 
+      // el nodo eliminado no tiene hijos
+      // con el método maxHeight recorremos el arbol en busca del mel mayor level
+      this.maxHeight(this.root);
     }
 
     // second case. One child
     // comprobamos que tenga uno, y sólo un hijo
     if (!nodeToRemove.left ^ !nodeToRemove.right) {
       // revisamos si el hijo de nodeToRemove es el izquierdo o el derecho
+      // En este caso el nodo hijo del nodo eliminado pasa a ocupar su lugar y por
+      // lo tanto también que cambia su nivel (ahora debe tener el nivel del padre eliminado)
       if (nodeToRemove.left) {
         nodeToRemove.left.parent = nodeToRemove.parent;
-        nodeToRemove.parent.left = nodeToRemove.left;
+        nodeToRemove.parent.right = nodeToRemove.left;
       } else {
         nodeToRemove.right.parent = nodeToRemove.parent;
-        nodeToRemove.parent.right = nodeToRemove.right;
+        nodeToRemove.parent.left = nodeToRemove.right;
       }
+      
     }
 
     // third case. Two childs
@@ -162,20 +170,30 @@ class BinarySearchTree {
       console.log(node.data);
     }
   }
+
+  maxHeight(node) {
+    if (node) {
+      if (node.level > this.heightAfterRemove) this.heightAfterRemove = node.level;
+      this.maxHeight(node.left);
+      this.maxHeight(node.right);
+      this.height = this.heightAfterRemove;
+    }
+  }
 }
 
 const myTree = new BinarySearchTree();
-myTree.insert(70);
-myTree.insert(15);
-myTree.insert(85);
 myTree.insert(10);
-myTree.insert(17);
-myTree.insert(75);
-myTree.insert(100);
+myTree.insert(5);
+myTree.insert(15);
+myTree.insert(7);
+myTree.insert(12);
 myTree.insert(20);
-myTree.insert(45);
+myTree.insert(100);
 
-myTree.inOrderTraversal(myTree.root);
+myTree.remove(5);
+console.log(myTree.root.left.data);
+
+
 // Ignorar esto
 // Función para mostrar de forma más gráfica el arbol
 function traverse(node) {
