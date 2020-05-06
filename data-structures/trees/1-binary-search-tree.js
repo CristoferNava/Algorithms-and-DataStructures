@@ -7,12 +7,14 @@ class Node {
     this.left = null;
     this.right = null;
     this.parent = null;
+    this.level;
   }
 }
 
 class BinarySearchTree {
   constructor() {
     this.root = null;
+    this.height = 0;
   }
 
   insert(data) {
@@ -20,18 +22,26 @@ class BinarySearchTree {
     // if it is the first node then it will be the root
     if (this.root === null) {
       this.root = newNode;
+      this.height = 1;
+      newNode.level = 1;
       return true;
     }
     
     // Inserting in another place
     let currentNode = this.root;
+    let levelsCounters = 1;
+
     while (true) {
+      levelsCounters++;
       // to the left
       if (newNode.data < currentNode.data) {
-        // if there's not node to the leff
+        // if there's not node to the left
         if (currentNode.left === null) {
           currentNode.left = newNode;
           newNode.parent = currentNode;
+          newNode.level = levelsCounters;
+          // check the height vs the levelsCounter
+          if (levelsCounters > this.height) this.height = levelsCounters;
           return true;
         }
         // if there's a node to the left
@@ -45,7 +55,10 @@ class BinarySearchTree {
         if (currentNode.right === null) {
           currentNode.right = newNode;
           newNode.parent = currentNode;
-          return true;;
+          newNode.level = levelsCounters;
+          // check the height vs the levelsCounter
+          if (levelsCounters > this.height) this.height = levelsCounters;
+          return true;
         }
 
         // if there's a node to the right
@@ -129,7 +142,7 @@ class BinarySearchTree {
   inOrderTraversal(node) {
     if (node) {
       this.inOrderTraversal(node.left);
-      console.log(node.data);
+      console.log(`value=${node.data} level=${node.level}`);
       this.inOrderTraversal(node.right);
     }
   }
@@ -156,12 +169,13 @@ myTree.insert(70);
 myTree.insert(15);
 myTree.insert(85);
 myTree.insert(10);
-myTree.insert(15);
+myTree.insert(17);
 myTree.insert(75);
 myTree.insert(100);
 myTree.insert(20);
 myTree.insert(45);
 
+myTree.inOrderTraversal(myTree.root);
 // Ignorar esto
 // Función para mostrar de forma más gráfica el arbol
 function traverse(node) {
