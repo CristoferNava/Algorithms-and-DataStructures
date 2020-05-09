@@ -1,6 +1,8 @@
 // Link para probar el código:
 // https://repl.it/@CristoferNava/binary-search-tree
 
+// TODO: Implementación de altura de arbol para el tercer caso de remove
+// TODO: Revisar factor de equilibrio y marcar puntos a implementar
 class Node {
   constructor(data) {
     this.data = data;
@@ -112,17 +114,26 @@ class BinarySearchTree {
       }
 
       // revisamos si el nodo a la derecha de nodeToRemove no tiene nodos a la izquierda
-      if (leftMostNode === nodeToRemove.right) {
+      if (leftMostNode === nodeToRemove.right) { 
+        // En este caso el nodo más a la izquierda puede tener un subarbol a su derecha
+        // por lo que tenemos que cambiar todos los niveles de sus hijos (se reducen en 1)
+        leftMostNode.level = leftMostNode.parent.level; 
+        
+        this.changeTreeLevels(nodeToRemove.right);
+        
         leftMostNode.parent = nodeToRemove.parent;
         nodeToRemove.parent.left = leftMostNode;
 
         nodeToRemove.left.parent = leftMostNode;
         leftMostNode.left = nodeToRemove.left;
+
+        leftMostNode.level = leftMostNode.parent.level + 1;
         return;
       }
-
+      this.changeTreeLevels(nodeToRemove.right);
+      // Le asignamos al nodo el nivel de su padre
       leftMostNode.parent.left = leftMostNode.right
-      leftMostNode.right.parent = leftMostNode.parent;
+      if (leftMostNode.right) leftMostNode.right.parent = leftMostNode.parent;
 
       leftMostNode.parent = nodeToRemove.parent;
       nodeToRemove.parent.left = leftMostNode;
@@ -131,9 +142,20 @@ class BinarySearchTree {
       nodeToRemove.left.parent = leftMostNode;
       leftMostNode.right = nodeToRemove.right;
       nodeToRemove.right.parent = leftMostNode;
+
+      leftMostNode.level = leftMostNode.parent.level + 1;
     }
 
     this.maxHeight(this.root);
+  }
+
+  changeTreeLevels(node) {
+    if (node) {
+      node.level -= 1;
+      // console.log(`Nodo: ${node.data} Level: ${node.level} ParentLevel: ${node.parent.level}`);
+      this.changeTreeLevels(node.left);
+      this.changeTreeLevels(node.right);
+    }
   }
 
   // O(log N) in a balanced BST
@@ -183,18 +205,31 @@ class BinarySearchTree {
   }
 }
 
-const myTree = new BinarySearchTree();
-myTree.insert(10);
-myTree.insert(5);
-myTree.insert(15);
-myTree.insert(7);
-myTree.insert(12);
-myTree.insert(20);
+// Llenamos el arbol con los elementos presentados en la tarea de borrados de nodos
+// para tener una representación visual 
 
+const myTree = new BinarySearchTree();
+myTree.insert(25);
+myTree.insert(10);
+myTree.insert(9);
+myTree.insert(16);
+myTree.insert(13);
+myTree.insert(18);
+myTree.insert(11);
+myTree.insert(14);
+
+
+// Revisamos que todos los nodos estén en su respectivo nivel
+console.log(`Altura: ${myTree.height}`);
 BinarySearchTree.inOrderTraversal(myTree.root);
-console.log();
-myTree.remove(5);
+
+// Eliminamos un nodo para revisar que todo funcione de manera correcta
+// Usamos el caso del nodo que tiene dos hijos puesto que es el más complejo
+// y nos permite ver que la implementación se correcta
+myTree.remove(10);
+console.log(`\nAltura después del borrado: ${myTree.height}`);
 BinarySearchTree.inOrderTraversal(myTree.root);
+
 // Ignorar esto
 // Función para mostrar de forma más gráfica el arbol
 function traverse(node) {
