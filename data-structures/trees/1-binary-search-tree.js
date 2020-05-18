@@ -1,8 +1,3 @@
-// Link para probar el código:
-// https://repl.it/@CristoferNava/binary-search-tree
-
-// TODO: Implementación de altura de arbol para el tercer caso de remove
-// TODO: Revisar factor de equilibrio y marcar puntos a implementar
 class Node {
   constructor(data) {
     this.data = data;
@@ -205,9 +200,6 @@ class BinarySearchTree {
   }
 }
 
-// Llenamos el arbol con los elementos presentados en la tarea de borrados de nodos
-// para tener una representación visual 
-
 const myTree = new BinarySearchTree();
 myTree.insert(25);
 myTree.insert(10);
@@ -229,6 +221,9 @@ BinarySearchTree.inOrderTraversal(myTree.root);
 myTree.remove(10);
 console.log(`\nAltura después del borrado: ${myTree.height}`);
 BinarySearchTree.inOrderTraversal(myTree.root);
+
+
+
 
 // Ignorar esto
 // Función para mostrar de forma más gráfica el arbol
