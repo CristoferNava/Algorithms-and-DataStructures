@@ -107,6 +107,36 @@ class AVLTree {
 				}
 			}
 		}
+
+		// Tercer caso: El nodo a remover tiene dos hijos
+		if (nodeToRemove.left && nodeToRemove.right) {
+			// Buscamos el nodo más a la izquierda
+			let leftMostNode = nodeToRemove.right;
+			while (leftMostNode.left) {
+				leftMostNode = leftMostNode.left;
+			}
+			// Revisamos si el nodo a la derecha de nodeToRemove no tiene nodos a la
+			// izquierda
+			if (leftMostNode === nodeToRemove.right) {
+				leftMostNode.parent = nodeToRemove.parent;
+				nodeToRemove.parent.left = leftMostNode;
+
+				nodeToRemove.left.parent = leftMostNode;
+				leftMostNode.left = nodeToRemove.left;
+				return;
+			}
+			// En caso de que sí existan nodos a la izquierda
+			leftMostNode.parent.left = leftMostNode.right;
+			if (leftMostNode.right) leftMostNode.right.parent = leftMostNode.parent;
+
+			leftMostNode.parent = nodeToRemove.parent;
+      nodeToRemove.parent.left = leftMostNode;
+
+      leftMostNode.left = nodeToRemove.left;
+      nodeToRemove.left.parent = leftMostNode;
+      leftMostNode.right = nodeToRemove.right;
+      nodeToRemove.right.parent = leftMostNode;
+		}
 	}
 
 	// método para buscar un nodo y retornarlo en caso de que se encuentre
