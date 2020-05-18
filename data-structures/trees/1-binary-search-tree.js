@@ -80,6 +80,7 @@ class BinarySearchTree {
       } 
       // en este caso no tenemos que cambiar niveles de ningún nodo, puesto que 
       // el nodo eliminado no tiene hijos
+      return;
     }
 
     // second case. One child

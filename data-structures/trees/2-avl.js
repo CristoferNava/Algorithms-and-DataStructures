@@ -13,6 +13,7 @@ class AVLTree {
 	constructor() {
 		this.root = null;
 		this.height = 0;
+		this.heightAfterRemove;
 	}
 
 	// método para insertar nodo
@@ -71,6 +72,7 @@ class AVLTree {
 
 	// método para eliminar un nodo
 	remove(data) {
+		this.heightAfterRemove = 0;
 		const nodeToRemove = this.search(data); // buscamos el nodo a eliminar
 		// si no existe el node devolvemos false
 		if (!nodeToRemove) return false;
@@ -81,6 +83,9 @@ class AVLTree {
 			// revisamos si nodeToRemove es el hijo izquierdo o derecho
 			if (nodeToRemove.parent.left === nodeToRemove) nodeToRemove.parent.left = null;
 			else nodeToRemove.parent.right = null;
+			// En este caso no tenemos que cambiar los niveles de ningún nodo, puesto
+			// el nodo eliminado no tiene hijos
+			return;
 		}
 
 		// Segundo caso: El nodo tiene un hijo
@@ -90,6 +95,7 @@ class AVLTree {
 			// En este caso el nodo hijo de nodeToRemove pasa a ocupar su lugar por lo 
 			// que también su nivel
 			if (nodeToRemove.left) { // si tiene un hijo a la izquierda
+				nodeToRemove.left.level = nodeToRemove.level;
 				nodeToRemove.left.parent = nodeToRemove.parent;
 				// revisamos si nodeToRemove es el hijo derecho o izquierdo de su padre
 				if (nodeToRemove === nodeToRemove.parent.left) {
@@ -98,6 +104,7 @@ class AVLTree {
 					nodeToRemove.parent.right = nodeToRemove.left;
 				}
 			} else { // si tiene un hijo a la derecha
+				nodeToRemove.right.level = nodeToRemove.level;
 				nodeToRemove.right.parent = nodeToRemove.parent;
 				// revisamos si nodeToRemove es el hijo derecho o izquierdo de su padre
 				if (nodeToRemove === nodeToRemove.parent.left) {
@@ -118,14 +125,23 @@ class AVLTree {
 			// Revisamos si el nodo a la derecha de nodeToRemove no tiene nodos a la
 			// izquierda
 			if (leftMostNode === nodeToRemove.right) {
+				// En este caso el nodo más a la izquierda puede tener un subarbol a su
+				// derecha, por lo que todos los nodos de es subarbol ven reducidos su
+				// nivel en 1
+				leftMostNode.level = leftMostNode.parent.level;
+				this.reduceOneLevel(nodeToRemove.right);
+
 				leftMostNode.parent = nodeToRemove.parent;
 				nodeToRemove.parent.left = leftMostNode;
 
 				nodeToRemove.left.parent = leftMostNode;
 				leftMostNode.left = nodeToRemove.left;
+
+				leftMostNode.level = leftMostNode.parent.level + 1;
 				return;
 			}
 			// En caso de que sí existan nodos a la izquierda
+			this.reduceOneLevel(nodeToRemove.right);
 			leftMostNode.parent.left = leftMostNode.right;
 			if (leftMostNode.right) leftMostNode.right.parent = leftMostNode.parent;
 
@@ -135,8 +151,13 @@ class AVLTree {
       leftMostNode.left = nodeToRemove.left;
       nodeToRemove.left.parent = leftMostNode;
       leftMostNode.right = nodeToRemove.right;
-      nodeToRemove.right.parent = leftMostNode;
+			nodeToRemove.right.parent = leftMostNode;
+			
+			leftMostNode.level = leftMostNode.parent.level + 1;
 		}
+
+		// Revisamos la altura del árbol después de los posible casos
+		this.calculateHeight(this.root);
 	}
 
 	// método para buscar un nodo y retornarlo en caso de que se encuentre
@@ -150,5 +171,24 @@ class AVLTree {
 		}
 		// si no se encontró el nodo regresamos false
 		return false;
+	}
+
+	// Método que reduce en 1 los niveles de todos los nodes dada la raíz (punto de inicio)
+	reduceOneLevel(node) {
+		if (node) {
+			node.level -= 1;
+			this.reduceOneLevel(node.left);
+			this.reduceOneLevel(node.right);
+		}
+	}
+
+	// Método que cálcula la altura del árbol después de que se eliminó un nodo
+	calculateHeight(node) {
+		if (node) {
+			if (node.level > this.heightAfterRemove) this.heightAfterRemove = node.level;
+			this.calculateHeight(node.left);
+			this.calculateHeight(node.right);
+			this.height = this.heightAfterRemove;
+		}
 	}
 }
