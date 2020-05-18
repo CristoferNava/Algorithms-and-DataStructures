@@ -201,29 +201,13 @@ class BinarySearchTree {
 }
 
 const myTree = new BinarySearchTree();
-myTree.insert(25);
+myTree.insert(27);
+myTree.insert(19);
+myTree.insert(34);
 myTree.insert(10);
-myTree.insert(9);
-myTree.insert(16);
-myTree.insert(13);
-myTree.insert(18);
-myTree.insert(11);
-myTree.insert(14);
 
-
-// Revisamos que todos los nodos estén en su respectivo nivel
-console.log(`Altura: ${myTree.height}`);
-BinarySearchTree.inOrderTraversal(myTree.root);
-
-// Eliminamos un nodo para revisar que todo funcione de manera correcta
-// Usamos el caso del nodo que tiene dos hijos puesto que es el más complejo
-// y nos permite ver que la implementación se correcta
-myTree.remove(10);
-console.log(`\nAltura después del borrado: ${myTree.height}`);
-BinarySearchTree.inOrderTraversal(myTree.root);
-
-
-
+myTree.remove(19);
+console.log(myTree.root.left.data);
 
 // Ignorar esto
 // Función para mostrar de forma más gráfica el arbol
