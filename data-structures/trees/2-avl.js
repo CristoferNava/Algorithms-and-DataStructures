@@ -46,6 +46,14 @@ class AVLTree {
 					newNode.level = levelsCounter;
 					// revisamos los niveles recorridos y lo comparamos con la altura del árbol
 					if (levelsCounter > this.height) this.height = levelsCounter;
+
+					// Puesto que se añadío un nodo tenemos que reportar a todos los nodos
+					// superiores que revisen su FE
+					currentNode = currentNode.parent;
+					while (currentNode) {
+						currentNode.balanceFactor = this.calculateBalanceFactor(currentNode);
+						currentNode = currentNode.parent;
+					}
 					return newNode;
 				}
 				// si hay un nodo a la izquierda continuamos recorriendo
@@ -63,6 +71,14 @@ class AVLTree {
 					newNode.parent = currentNode;
 					newNode.level = levelsCounter;
 					if (levelsCounter > this.height) this.height = levelsCounter;
+
+					// Puesto que se añadío un nodo tenemos que reportar a todos los nodos
+					// superiores que revisen su FE
+					currentNode = currentNode.parent;
+					while (currentNode) {
+						currentNode.balanceFactor = this.calculateBalanceFactor(currentNode);
+						currentNode = currentNode.parent;
+					}
 					return newNode;
 				}
 				// si hay un nodo a la derecha
@@ -197,7 +213,7 @@ class AVLTree {
 	}
 
 	// Método que dado un nodo cálcula su factor de equilibrio
-	static calculateBalanceFactor(node) {
+	calculateBalanceFactor(node) {
 		if (!node.right && !node.left) return 0;
 		if (node.right === null) return 0 - this.calcTreeHeight(node.left);
 		if (node.left === null) return this.calcTreeHeight(node.right) - 0;
@@ -205,14 +221,14 @@ class AVLTree {
 	}
 
 	// Método que dado un nodo (el cual toma como raíz) regresa la altura del árbol
-	static calcTreeHeight(node) {
+	calcTreeHeight(node) {
 		this.minLevel = node.level;
 		this.maxLevel = node.level;
 		this.helper(node);
 		return this.maxLevel - this.minLevel + 1;
 	}
 
-	static helper(node) {
+	helper(node) {
 		if (node) {
 			if (node.level > this.maxLevel) this.maxLevel = node.level;
 			if (node.level < this.minLevel) this.minLevel = node.level;
@@ -238,16 +254,3 @@ myTree.insert(10);
 myTree.insert(20);
 myTree.insert(30);
 myTree.insert(14);
-
-const factors = [];
-factors.push(AVLTree.calculateBalanceFactor(myTree.root));
-factors.push(AVLTree.calculateBalanceFactor(myTree.root.left));
-factors.push(AVLTree.calculateBalanceFactor(myTree.root.right));
-factors.push(AVLTree.calculateBalanceFactor(myTree.root.left.left));
-factors.push(AVLTree.calculateBalanceFactor(myTree.root.left.right));
-factors.push(AVLTree.calculateBalanceFactor(myTree.root.right.left));
-factors.push(AVLTree.calculateBalanceFactor(myTree.root.left.left.right));
-
-for (factor of factors) {
-	console.log(factor);
-}
