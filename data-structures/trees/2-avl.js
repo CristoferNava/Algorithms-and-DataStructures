@@ -1,3 +1,6 @@
+// TODO: Revisar cambio de niveles
+// TODO: Revisar cambio de altura del árbol
+
 class Node {
 	constructor(data) {
 		this.data = data;
@@ -52,6 +55,12 @@ class AVLTree {
 					currentNode = currentNode.parent;
 					while (currentNode) {
 						currentNode.balanceFactor = this.calculateBalanceFactor(currentNode);
+						if (Math.abs(currentNode.balanceFactor) >= 2) {
+							// Encontramos un FE >= 2 por lo que tenemos que revisar cual caso de rotación tenemos que realizar
+							// Rotación Simple Izquierda: El hijo derecho tiene un FE positivo
+							if (currentNode.right.balanceFactor > 0) this.leftRotation(currentNode);
+							break;
+						} 
 						currentNode = currentNode.parent;
 					}
 					return newNode;
@@ -77,6 +86,12 @@ class AVLTree {
 					currentNode = currentNode.parent;
 					while (currentNode) {
 						currentNode.balanceFactor = this.calculateBalanceFactor(currentNode);
+						if (Math.abs(currentNode.balanceFactor) >= 2) {
+							// Encontramos un FE >= 2 por lo que tenemos que revisar cual caso de rotación tenemos que realizar
+							// Rotación Simple Izquierda: El hijo derecho tiene un FE positivo
+							if (currentNode.right.balanceFactor > 0) this.leftRotation(currentNode);
+							break;
+						} 
 						currentNode = currentNode.parent;
 					}
 					return newNode;
@@ -244,13 +259,36 @@ class AVLTree {
 			this.inOrderTraversal(node.right);
 		}
 	}
+
+	leftRotation(node) {
+		// Hacemos el cambio de los niveles
+		node.right.right.level = node.right.level;
+		node.right.level = node.level;
+		node.level += 1;
+
+		// Hacemos el cambio de nodos
+		node.parent.right = node.right;
+		node.right.left = node;
+		node.right.parent = node.parent;
+		node.parent = node.right;
+		node.right = null;
+		// console.log(this.calcTreeHeight(this.root));
+
+		// Hacemos el cambio de los FE
+		node.balanceFactor = this.calculateBalanceFactor(node);
+		node.parent.balanceFactor = this.calculateBalanceFactor(node.parent);
+		node.parent.right.balanceFactor = this.calculateBalanceFactor(node.parent.right);
+
+		// Recalculamos la altura de todo el árbol
+		this.height = this.calcTreeHeight(this.root);
+	}
 }
 
 const myTree = new AVLTree();
-myTree.insert(27);
-myTree.insert(19);
-myTree.insert(34);
-myTree.insert(10);
-myTree.insert(20);
 myTree.insert(30);
-myTree.insert(14);
+myTree.insert(10);
+myTree.insert(40);
+myTree.insert(41);
+myTree.insert(42);
+
+console.log(myTree.height);
