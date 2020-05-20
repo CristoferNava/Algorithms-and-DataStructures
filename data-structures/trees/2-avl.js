@@ -1,5 +1,4 @@
-// TODO: Revisar cambio de niveles
-// TODO: Revisar cambio de altura del árbol
+// TODO: Implementación de right-rotation
 
 class Node {
 	constructor(data) {
@@ -58,7 +57,11 @@ class AVLTree {
 						if (Math.abs(currentNode.balanceFactor) >= 2) {
 							// Encontramos un FE >= 2 por lo que tenemos que revisar cual caso de rotación tenemos que realizar
 							// Rotación Simple Izquierda: El hijo derecho tiene un FE positivo
-							if (currentNode.right.balanceFactor > 0) this.leftRotation(currentNode);
+							if (currentNode.right) {
+								if (currentNode.right.balanceFactor > 0) this.leftRotation(currentNode);
+							}
+							// Rotación Simple Derecha: El hijo izquierdo tiene un FE negativo
+							if (currentNode.left.balanceFactor < 0) this.rightRotation(currentNode);
 							break;
 						} 
 						currentNode = currentNode.parent;
@@ -89,7 +92,11 @@ class AVLTree {
 						if (Math.abs(currentNode.balanceFactor) >= 2) {
 							// Encontramos un FE >= 2 por lo que tenemos que revisar cual caso de rotación tenemos que realizar
 							// Rotación Simple Izquierda: El hijo derecho tiene un FE positivo
-							if (currentNode.right.balanceFactor > 0) this.leftRotation(currentNode);
+							if (currentNode.right) {
+								if (currentNode.right.balanceFactor > 0) this.leftRotation(currentNode);
+							}
+							// Rotación Simple Derecha: El hijo izquierdo tiene un FE negativo
+							if (currentNode.left.balanceFactor < 0) this.rightRotation(currentNode);
 							break;
 						} 
 						currentNode = currentNode.parent;
@@ -272,7 +279,6 @@ class AVLTree {
 		node.right.parent = node.parent;
 		node.parent = node.right;
 		node.right = null;
-		// console.log(this.calcTreeHeight(this.root));
 
 		// Hacemos el cambio de los FE
 		node.balanceFactor = this.calculateBalanceFactor(node);
@@ -282,13 +288,35 @@ class AVLTree {
 		// Recalculamos la altura de todo el árbol
 		this.height = this.calcTreeHeight(this.root);
 	}
+
+	rightRotation(node) {
+		// Hacemos el cambio de niveles
+		node.left.left.level = node.left.level;
+		node.left.level = node.level;
+		node.level += 1; 
+
+		// Hacemos el cambio de nodos
+		node.parent.left = node.left;
+		node.left.right = node;
+		node.left.parent = node.parent;
+		node.parent = node.left;
+		node.left = null;
+
+		// Hacemos el cambio de los FE
+		node.balanceFactor = this.calculateBalanceFactor(node);
+		node.parent.balanceFactor = this.calculateBalanceFactor(node.parent);
+		node.parent.left.balanceFactor = this.calculateBalanceFactor(node.parent.left);
+
+		// Recalculamos la altura de todo el árbol
+		this.height = this.calcTreeHeight(this.root);
+	}
 }
 
 const myTree = new AVLTree();
-myTree.insert(30);
-myTree.insert(10);
-myTree.insert(40);
-myTree.insert(41);
-myTree.insert(42);
+myTree.insert(5);
+myTree.insert(4);
+myTree.insert(6);
+myTree.insert(3);
+myTree.insert(2);
 
 console.log(myTree.height);
