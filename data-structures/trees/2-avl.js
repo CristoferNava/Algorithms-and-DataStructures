@@ -1,4 +1,4 @@
-// TODO: Implementación de right-rotation
+// TODO: Implementar leftRightRotation
 
 class Node {
 	constructor(data) {
@@ -60,8 +60,12 @@ class AVLTree {
 							if (currentNode.right) {
 								if (currentNode.right.balanceFactor > 0) this.leftRotation(currentNode);
 							}
-							// Rotación Simple Derecha: El hijo izquierdo tiene un FE negativo
-							if (currentNode.left.balanceFactor < 0) this.rightRotation(currentNode);
+							if (currentNode.left) {
+								// Rotación Simple Derecha: El hijo izquierdo tiene un FE negativo
+								if (currentNode.left.balanceFactor < 0) this.rightRotation(currentNode);
+								// Rotación doble izquierda-derecha
+								if (currentNode.left.balanceFactor > 0) this.leftRightRotation(currentNode);
+							}
 							break;
 						} 
 						currentNode = currentNode.parent;
@@ -95,8 +99,12 @@ class AVLTree {
 							if (currentNode.right) {
 								if (currentNode.right.balanceFactor > 0) this.leftRotation(currentNode);
 							}
-							// Rotación Simple Derecha: El hijo izquierdo tiene un FE negativo
-							if (currentNode.left.balanceFactor < 0) this.rightRotation(currentNode);
+							if (currentNode.left) {
+								// Rotación Simple Derecha: El hijo izquierdo tiene un FE negativo
+								if (currentNode.left.balanceFactor < 0) this.rightRotation(currentNode);
+								// Rotación doble izquierda-derecha
+								if (currentNode.left.balanceFactor > 0) this.leftRightRotation(currentNode);
+							}
 							break;
 						} 
 						currentNode = currentNode.parent;
@@ -310,13 +318,31 @@ class AVLTree {
 		// Recalculamos la altura de todo el árbol
 		this.height = this.calcTreeHeight(this.root);
 	}
+
+	leftRightRotation(node) {
+		// Interacambiamos los nodos
+		node.left.right.left = node.left;
+		node.left.right.parent = node;
+		node.left.parent = node.left.right;
+		node.left = node.left.right;
+		node.left.left.right = null;
+
+		// En este momento los nodos están en la posicón correcta para un cambio de
+		// rotación simple derecha, sólo tenemos que cambiar los niveles
+		node.left.level -= 1; // Subió un nivel más cerca de la raíz
+		node.left.left.level += 1; // Se alejó un nivel de la raíz
+
+		// Hacemos la rotación simple derecha
+		this.rightRotation(node);
+	}
 }
 
 const myTree = new AVLTree();
-myTree.insert(5);
-myTree.insert(4);
 myTree.insert(6);
+myTree.insert(5);
+myTree.insert(7);
 myTree.insert(3);
-myTree.insert(2);
+myTree.insert(4);
 
+console.log(myTree.root.left.right.balanceFactor);
 console.log(myTree.height);
