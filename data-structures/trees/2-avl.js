@@ -1,4 +1,4 @@
-// TODO: Implementar leftRightRotation
+// TODO: Implementar rightLeftRotation
 
 class Node {
 	constructor(data) {
@@ -56,12 +56,14 @@ class AVLTree {
 						currentNode.balanceFactor = this.calculateBalanceFactor(currentNode);
 						if (Math.abs(currentNode.balanceFactor) >= 2) {
 							// Encontramos un FE >= 2 por lo que tenemos que revisar cual caso de rotación tenemos que realizar
-							// Rotación Simple Izquierda: El hijo derecho tiene un FE positivo
 							if (currentNode.right) {
+								// Rotación Simple Izquierda
 								if (currentNode.right.balanceFactor > 0) this.leftRotation(currentNode);
+								// Rotación doble derecha-izquierda
+								if (currentNode.right.balanceFactor < 0) this.rightLeftRotation(currentNode);
 							}
 							if (currentNode.left) {
-								// Rotación Simple Derecha: El hijo izquierdo tiene un FE negativo
+								// Rotación Simple Derecha
 								if (currentNode.left.balanceFactor < 0) this.rightRotation(currentNode);
 								// Rotación doble izquierda-derecha
 								if (currentNode.left.balanceFactor > 0) this.leftRightRotation(currentNode);
@@ -335,14 +337,31 @@ class AVLTree {
 		// Hacemos la rotación simple derecha
 		this.rightRotation(node);
 	}
+
+	rightLeftRotation(node) {
+		// Intercambiamos los nodos
+		node.right.left.right = node.right;
+		node.right.left.parent = node;
+		node.right.parent = node.right.left;
+		node.right = node.right.left;
+		node.right.right.left = null;
+
+		// En este momento los nodos están en la posicón correcta para un cambio de
+		// rotación simple izquierda, sólo tenemos que cambiar los niveles
+		node.right.level -= 1; // Subió un nivel más cerca de la raíz
+		node.right.right.level += 1; // Se alejó un nivel de la raíz
+
+		// Hacemos la rotacióm simple izquierda
+		this.leftRotation(node);
+	}
 }
 
 const myTree = new AVLTree();
 myTree.insert(6);
 myTree.insert(5);
 myTree.insert(7);
-myTree.insert(3);
-myTree.insert(4);
+myTree.insert(9);
+myTree.insert(8);
 
-console.log(myTree.root.left.right.balanceFactor);
+console.log(myTree.root.right.right.balanceFactor);
 console.log(myTree.height);
