@@ -1,4 +1,9 @@
-// TODO: Implementar rightLeftRotation
+// TODO: Revisar que los cuatro casos funcionen de manera correcta
+// TODO: Revisar un caso general de árbol
+// TODO: Revisar los casos de borrado
+// TODO: Implementar los casos para los borrados de los nodos
+// TODO: Revisión general y si es necesario refactorizar
+// TODO: Hacer documento con todos los casos bases 
 
 class Node {
 	constructor(data) {
@@ -58,17 +63,28 @@ class AVLTree {
 							// Encontramos un FE >= 2 por lo que tenemos que revisar cual caso de rotación tenemos que realizar
 							if (currentNode.right) {
 								// Rotación Simple Izquierda
-								if (currentNode.right.balanceFactor > 0) this.leftRotation(currentNode);
+								if (currentNode.right.balanceFactor > 0) {
+                  this.leftRotation(currentNode);
+                  break;
+								}
 								// Rotación doble derecha-izquierda
-								if (currentNode.right.balanceFactor < 0) this.rightLeftRotation(currentNode);
+								if (currentNode.right.balanceFactor < 0) {
+                  this.rightLeftRotation(currentNode);
+                  break;
+                }
 							}
 							if (currentNode.left) {
 								// Rotación Simple Derecha
-								if (currentNode.left.balanceFactor < 0) this.rightRotation(currentNode);
+                if (currentNode.left.balanceFactor < 0) {
+                  this.rightRotation(currentNode);
+                  break;
+                }
 								// Rotación doble izquierda-derecha
-								if (currentNode.left.balanceFactor > 0) this.leftRightRotation(currentNode);
+                if (currentNode.left.balanceFactor > 0) {
+                  this.leftRightRotation(currentNode);
+                  break;
+                }
 							}
-							break;
 						} 
 						currentNode = currentNode.parent;
 					}
@@ -97,17 +113,30 @@ class AVLTree {
 						currentNode.balanceFactor = this.calculateBalanceFactor(currentNode);
 						if (Math.abs(currentNode.balanceFactor) >= 2) {
 							// Encontramos un FE >= 2 por lo que tenemos que revisar cual caso de rotación tenemos que realizar
-							// Rotación Simple Izquierda: El hijo derecho tiene un FE positivo
 							if (currentNode.right) {
-								if (currentNode.right.balanceFactor > 0) this.leftRotation(currentNode);
+								// Rotación Simple Izquierda
+								if (currentNode.right.balanceFactor > 0) {
+                  this.leftRotation(currentNode);
+                  break;
+								}
+								// Rotación doble derecha-izquierda
+								if (currentNode.right.balanceFactor < 0) {
+                  this.rightLeftRotation(currentNode);
+                  break;
+                }
 							}
 							if (currentNode.left) {
-								// Rotación Simple Derecha: El hijo izquierdo tiene un FE negativo
-								if (currentNode.left.balanceFactor < 0) this.rightRotation(currentNode);
+								// Rotación Simple Derecha
+                if (currentNode.left.balanceFactor < 0) {
+                  this.rightRotation(currentNode);
+                  break;
+                }
 								// Rotación doble izquierda-derecha
-								if (currentNode.left.balanceFactor > 0) this.leftRightRotation(currentNode);
+                if (currentNode.left.balanceFactor > 0) {
+                  this.leftRightRotation(currentNode);
+                  break;
+                }
 							}
-							break;
 						} 
 						currentNode = currentNode.parent;
 					}
@@ -272,7 +301,7 @@ class AVLTree {
 	static inOrderTraversal(node) {
 		if (node) {
 			this.inOrderTraversal(node.left);
-			console.log(`value=${node.data} level=${node.level}`);
+			console.log(`Valor=${node.data} Nivel=${node.level} F.E=${node.balanceFactor}`);
 			this.inOrderTraversal(node.right);
 		}
 	}
@@ -356,12 +385,49 @@ class AVLTree {
 	}
 }
 
-const myTree = new AVLTree();
-myTree.insert(6);
-myTree.insert(5);
-myTree.insert(7);
-myTree.insert(9);
-myTree.insert(8);
+// Probamos que los casos de las rotaciones funcionen
+// Caso para la rotación simple izquierda
+console.log("Caso de rotación simple izquierda: ");
+const treeLeft = new AVLTree();
+treeLeft.insert(2);
+treeLeft.insert(1);
+treeLeft.insert(3);
+treeLeft.insert(4);
+treeLeft.insert(5);
+AVLTree.inOrderTraversal(treeLeft.root);
+console.log(`Altura del árbol: ${treeLeft.height}\n`);
 
-console.log(myTree.root.right.right.balanceFactor);
-console.log(myTree.height);
+// Caso para la rotación simple derecha
+console.log("Caso de rotación simple derecha: ");
+const treeRight = new AVLTree();
+treeRight.insert(5);
+treeRight.insert(4);
+treeRight.insert(6);
+treeRight.insert(3);
+treeRight.insert(2);
+AVLTree.inOrderTraversal(treeRight.root);
+console.log(`Altura del árbol: ${treeRight.height}\n`);
+
+// Caso para la rotación doble izquierda-derecha
+console.log("Caso de rotación doble izquierda-derecha: ");
+const treeLeftRight = new AVLTree();
+treeLeftRight.insert(5);
+treeLeftRight.insert(4);
+treeLeftRight.insert(6);
+treeLeftRight.insert(2);
+treeLeftRight.insert(3);
+AVLTree.inOrderTraversal(treeLeftRight.root);
+console.log(`Altura del árbol: ${treeLeftRight.height}\n`);
+
+// Caso para la rotación doble derecha-izquierda
+console.log("Caso de rotación doble derecha-izquierda: ");
+const treeRightLeft = new AVLTree();
+treeRightLeft.insert(3);
+treeRightLeft.insert(2);
+treeRightLeft.insert(4);
+treeRightLeft.insert(6);
+treeRightLeft.insert(5);
+AVLTree.inOrderTraversal(treeRightLeft.root);
+console.log(`Altura del árbol: ${treeRightLeft.height}\n`);
+
+
