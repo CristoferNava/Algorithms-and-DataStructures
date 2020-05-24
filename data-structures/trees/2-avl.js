@@ -32,7 +32,6 @@ class AVLTree {
 			this.height = 1;
 			return newNode;
 		}
-
 		// si no es el primer nodo en ser insertado tenemos que insertarlo en su 
 		// respectiva posición
 		let currentNode = this.root;
@@ -54,14 +53,14 @@ class AVLTree {
 					if (levelsCounter > this.height) this.height = levelsCounter;
 
 					// Puesto que se añadío un nodo tenemos que reportar a todos los nodos
-					// superiores que revisen su FE
-					currentNode = currentNode.parent;
+          // superiores que revisen su FE
+          currentNode = currentNode.parent;
 					while (currentNode) {
-						currentNode.balanceFactor = this.calculateBalanceFactor(currentNode);
+            currentNode.balanceFactor = this.calculateBalanceFactor(currentNode);
 						if (Math.abs(currentNode.balanceFactor) >= 2) {
-							// Encontramos un FE >= 2 por lo que tenemos que revisar cual caso de rotación tenemos que realizar
+              // Encontramos un FE >= 2 por lo que tenemos que revisar cual caso de rotación tenemos que realizar
 							if (currentNode.right) {
-								// Rotación Simple Izquierda
+                // Rotación Simple Izquierda
 								if (currentNode.right.balanceFactor > 0) {
                   this.leftRotation(currentNode);
                   break;
@@ -73,7 +72,7 @@ class AVLTree {
                 }
 							}
 							if (currentNode.left) {
-								// Rotación Simple Derecha
+                // Rotación Simple Derecha
                 if (currentNode.left.balanceFactor < 0) {
                   this.rightRotation(currentNode);
                   break;
@@ -106,8 +105,8 @@ class AVLTree {
 					if (levelsCounter > this.height) this.height = levelsCounter;
 
 					// Puesto que se añadío un nodo tenemos que reportar a todos los nodos
-					// superiores que revisen su FE
-					currentNode = currentNode.parent;
+          // superiores que revisen su FE
+          currentNode = currentNode.parent;
 					while (currentNode) {
 						currentNode.balanceFactor = this.calculateBalanceFactor(currentNode);
 						if (Math.abs(currentNode.balanceFactor) >= 2) {
@@ -274,9 +273,9 @@ class AVLTree {
 
 	// Método que dado un nodo cálcula su factor de equilibrio
 	calculateBalanceFactor(node) {
-		if (!node.right && !node.left) return 0;
-		if (node.right === null) return 0 - this.calcTreeHeight(node.left);
-		if (node.left === null) return this.calcTreeHeight(node.right) - 0;
+    if (!node.right && !node.left) return 0;
+    if (node.right === null) return 0 - this.calcTreeHeight(node.left);
+    if (node.left === null) return this.calcTreeHeight(node.right) - 0;
 		return this.calcTreeHeight(node.right) - this.calcTreeHeight(node.left);
 	}
 
@@ -342,11 +341,19 @@ class AVLTree {
 		node.level += 1; 
 
 		// Hacemos el cambio de nodos
-		node.parent.left = node.left;
-		node.left.right = node;
-		node.left.parent = node.parent;
-		node.parent = node.left;
-		node.left = null;
+    if (node === this.root) { // En caso de que node sea el nodo raíz
+      node.left.right = node;
+      node.parent = node.left;
+      this.root = node.left;
+      this.root.parent = null;
+      this.root.right.left = null;
+    } else { // Sino es el nodo raíz
+      node.parent.left = node.left;
+      node.left.right = node;
+      node.left.parent = node.parent;
+      node.parent = node.left;
+      node.left = null;
+    }
 
 		// Hacemos el cambio de los FE
 		node.balanceFactor = this.calculateBalanceFactor(node);
@@ -439,12 +446,9 @@ AVLTree.inOrderTraversal(treeRightLeft.root);
 console.log(`Altura del árbol: ${treeRightLeft.height}\n`);*/
 
 // Caso general
-console.log("Caso de rotación doble derecha-izquierda: ");
 const treeRightLeft = new AVLTree();
-treeRightLeft.insert(1);
-treeRightLeft.insert(2);
 treeRightLeft.insert(3);
-treeRightLeft.insert(4);
-treeRightLeft.insert(5);
+treeRightLeft.insert(2);
+treeRightLeft.insert(1);
 AVLTree.inOrderTraversal(treeRightLeft.root);
 console.log(`Altura del árbol: ${treeRightLeft.height}\n`);
