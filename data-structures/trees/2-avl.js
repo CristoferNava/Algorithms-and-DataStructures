@@ -1,4 +1,3 @@
-// TODO: Revisar que los cuatro casos funcionen de manera correcta
 // TODO: Revisar un caso general de árbol
 // TODO: Revisar los casos de borrado
 // TODO: Implementar los casos para los borrados de los nodos
@@ -307,17 +306,25 @@ class AVLTree {
 	}
 
 	leftRotation(node) {
-		// Hacemos el cambio de los niveles
+    // Hacemos el cambio de los niveles
 		node.right.right.level = node.right.level;
 		node.right.level = node.level;
 		node.level += 1;
 
-		// Hacemos el cambio de nodos
-		node.parent.right = node.right;
-		node.right.left = node;
-		node.right.parent = node.parent;
-		node.parent = node.right;
-		node.right = null;
+    // Hacemos el cambio de nodos
+    if (node === this.root) { // En caso de que node sea el nodo raíz
+      node.right.left = node;
+      node.parent = node.right;
+      this.root = node.right;
+      this.root.parent = null;
+      this.root.left.right = null;
+    } else { // Sino es el nodo raíz
+      node.parent.right = node.right;
+      node.right.left = node;
+      node.right.parent = node.parent;
+      node.parent = node.right;
+      node.right = null;
+    }
 
 		// Hacemos el cambio de los FE
 		node.balanceFactor = this.calculateBalanceFactor(node);
@@ -385,6 +392,7 @@ class AVLTree {
 	}
 }
 
+/*
 // Probamos que los casos de las rotaciones funcionen
 // Caso para la rotación simple izquierda
 console.log("Caso de rotación simple izquierda: ");
@@ -428,6 +436,15 @@ treeRightLeft.insert(4);
 treeRightLeft.insert(6);
 treeRightLeft.insert(5);
 AVLTree.inOrderTraversal(treeRightLeft.root);
+console.log(`Altura del árbol: ${treeRightLeft.height}\n`);*/
+
+// Caso general
+console.log("Caso de rotación doble derecha-izquierda: ");
+const treeRightLeft = new AVLTree();
+treeRightLeft.insert(1);
+treeRightLeft.insert(2);
+treeRightLeft.insert(3);
+treeRightLeft.insert(4);
+treeRightLeft.insert(5);
+AVLTree.inOrderTraversal(treeRightLeft.root);
 console.log(`Altura del árbol: ${treeRightLeft.height}\n`);
-
-
