@@ -445,10 +445,15 @@ treeRightLeft.insert(5);
 AVLTree.inOrderTraversal(treeRightLeft.root);
 console.log(`Altura del árbol: ${treeRightLeft.height}\n`);*/
 
-// Caso general
-const treeRightLeft = new AVLTree();
-treeRightLeft.insert(3);
-treeRightLeft.insert(2);
-treeRightLeft.insert(1);
-AVLTree.inOrderTraversal(treeRightLeft.root);
-console.log(`Altura del árbol: ${treeRightLeft.height}\n`);
+// Caso Especial. Un árbol no balanceado puede convertirse en una Linked List
+// por lo que probamos que nuestro árbol no se transfome en una lista enlazada
+const myTree = new AVLTree();
+myTree.insert(5);
+myTree.insert(6);
+myTree.insert(7);
+myTree.insert(8);
+myTree.insert(9);
+myTree.insert(4);
+myTree.insert(3);
+AVLTree.inOrderTraversal(myTree.root);
+console.log(`Altura del árbol: ${myTree.height}\n`);
