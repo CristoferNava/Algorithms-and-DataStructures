@@ -1,8 +1,7 @@
-// TODO: Revisar un caso general de árbol
-// TODO: Revisar los casos de borrado
-// TODO: Implementar los casos para los borrados de los nodos
-// TODO: Revisión general y si es necesario refactorizar
-// TODO: Hacer documento con todos los casos bases 
+// Árbol ALV
+// Carmona Nava Cristofer José
+// Link para probar el código: 
+// https://repl.it/@CristoferNava/AVLTree
 
 class Node {
 	constructor(data) {
@@ -399,7 +398,6 @@ class AVLTree {
 	}
 }
 
-/*
 // Probamos que los casos de las rotaciones funcionen
 // Caso para la rotación simple izquierda
 console.log("Caso de rotación simple izquierda: ");
@@ -443,10 +441,11 @@ treeRightLeft.insert(4);
 treeRightLeft.insert(6);
 treeRightLeft.insert(5);
 AVLTree.inOrderTraversal(treeRightLeft.root);
-console.log(`Altura del árbol: ${treeRightLeft.height}\n`);*/
+console.log(`Altura del árbol: ${treeRightLeft.height}\n`);
 
 // Caso Especial. Un árbol no balanceado puede convertirse en una Linked List
 // por lo que probamos que nuestro árbol no se transfome en una lista enlazada
+console.log("Caso especial:");
 const myTree = new AVLTree();
 myTree.insert(5);
 myTree.insert(6);
@@ -455,5 +454,9 @@ myTree.insert(8);
 myTree.insert(9);
 myTree.insert(4);
 myTree.insert(3);
+myTree.insert(2);
+myTree.insert(10);
+myTree.insert(11);
+myTree.insert(1);
 AVLTree.inOrderTraversal(myTree.root);
 console.log(`Altura del árbol: ${myTree.height}\n`);
