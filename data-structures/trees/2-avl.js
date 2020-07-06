@@ -443,6 +443,7 @@ treeRightLeft.insert(5);
 AVLTree.inOrderTraversal(treeRightLeft.root);
 console.log(`Altura del árbol: ${treeRightLeft.height}\n`);
 
+
 // Caso Especial. Un árbol no balanceado puede convertirse en una Linked List
 // por lo que probamos que nuestro árbol no se transfome en una lista enlazada
 console.log("Caso especial:");
