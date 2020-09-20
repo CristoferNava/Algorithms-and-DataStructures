@@ -6,13 +6,32 @@ using namespace std;
 
 int maxSubarraySum2(vector<int>);
 int maxSubarraySum3(vector<int>);
+int maxSubarraySum(vector<int>);
 
 int main() {
     vector<int> numbers = {-1, 2, 4, -3, 5, 2, -5, 2};
 
-    cout << maxSubarraySum2(numbers) << "\n";  
+    cout << maxSubarraySum(numbers) << "\n";  
 
     return 0;
+}
+
+int maxSubarraySum(vector<int> arr) {
+    // time complexity: O(n)
+    // space complexity: O(1)
+    
+    // for each array position, calculate the maximum sum of a subarray that
+    // ends at that position  
+    int best = 0;
+    int sum = 0;
+    int n = arr.size();
+
+    for (int i = 0; i < n; i++) {
+        sum = max(arr[i], sum + arr[i]);
+        best = max(best, sum);
+    }
+
+    return best;
 }
 
 int maxSubarraySum2(vector<int> arr) {
