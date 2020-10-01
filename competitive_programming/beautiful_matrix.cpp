@@ -15,14 +15,17 @@ int main() {
         }
     }
 
+    // 1 (p1, p2)
     // first move p1 to the correct position
     // if p1 == b1 no hagas nada
     // if p1 < b1 incrementa p1 hasta llegar a b1 b1 - p1 
     // if p1 > b1 decrementa b1 hata llegar b1
 
+    // rows
     if (p1 < b1) steps += b1 - p1;
     else if (p1 > b1) steps += p1 - b1;
 
+    // cols
     if (p2 < b2) steps += b2 - p2;
     else if (p2 > b2) steps += p2 - b2;
 
