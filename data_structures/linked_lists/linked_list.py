@@ -30,4 +30,19 @@ my_linked_list.append(87)
 my_linked_list.append(56)
 my_linked_list.append(23)
 
-print(my_linked_list.head.next.next.data)
+# print(my_linked_list.head.next.next.data)
+
+
+
+
+
+
+
+def recursive(numbers, i):
+    if i == len(numbers):
+        return
+    print(numbers[i])
+    return recursive(numbers, i+1)
+
+numbers = [1, 2, 3, 4, 5, 6, 7, 23]
+recursive(numbers, 0)
