@@ -48,4 +48,6 @@ int main() {
 
     cout << common << endl;
 
+    // sort both lists, iterate through both the list at the same time and find
+    // the common elements
 }
