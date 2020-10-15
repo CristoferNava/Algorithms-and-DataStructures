@@ -3,4 +3,5 @@
 test/
 problems/go/
 *.vscode/
-test.cpp
+*test.cpp
+*test.py
