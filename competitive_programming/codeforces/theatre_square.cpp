@@ -7,8 +7,6 @@ int main() {
     long double a; 
     cin >> n >> m >> a;
 
-    int t = 0;
-
     n /= a;
     if ((long long int)n != n) n++;
     n = (long long int)n;
