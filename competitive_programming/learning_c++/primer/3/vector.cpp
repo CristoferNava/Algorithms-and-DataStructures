@@ -19,7 +19,7 @@ int main() {
     cout << endl;
 
     // creating a specified number of elements
-    vector<int> v5(10, 1); // 10 elements, each initialized to 0
+    vector<int> v5(10, 0); // 10 elements, each initialized to 0
     for (auto n : v5)
         cout << n << " ";
     cout << endl;
