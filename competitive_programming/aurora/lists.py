@@ -45,7 +45,7 @@ l1 = [23, 12, 11, 45, 1]
 # l1.sort()
 # l2 = sorted(l1, reverse=True)
 l2 = sorted(l1)
-l2 = l2[::-1]
+l3 = l2[::-1]
 # print(l1)
 # print(l2)
 
