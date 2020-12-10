@@ -26,3 +26,34 @@ int minC(int n1, int n2) {
     // estudiar mcm, mcd y qué tienen en común
     // estudiar código para los primos
 }
+
+# AI. ML, DL, DS
+# R, Python
+# Simple de aplicar, simple de leer
+# qué tan bueno es, realmente se usa?
+
+# C++
+# SO, servidores, librerías
+
+C++      vs Python
+Compilado
+
+
+int main() {
+    cout << "hola" << endl;
+}
+
+compilador específico para tu sistema operativo
+laptops 
+ing software
+
+Java
+-- Robusto
+-- Escalable 
+-- POO (Abstracción, Herencia, Polimorfismo, Encapsulación)
+-- Multihilo, concurrente
+
+¿Windows, Mac, Teléfono?
+
+[JVM] Portabilidad
+

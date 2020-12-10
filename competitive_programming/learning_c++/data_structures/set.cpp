@@ -17,7 +17,6 @@ int main() {
     s.erase(3); 
     cout << s.count(3) << endl;
     cout << endl;
-
     // in a set we can't no access the elements using []
     set<int> a = {2, 5, 6, 8};
     cout << a.size() << endl;
