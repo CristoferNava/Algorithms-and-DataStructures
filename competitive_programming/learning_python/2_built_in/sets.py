@@ -12,7 +12,7 @@ small_primes.add(3) # trying to add 3 again
 print(small_primes) # no change, duplication is not allowed 
 
 # faster creation of a set
-bigger_primes = set([5, 7, 11, 13])
+bigger_primes = set([5, 7, 11, 13]) # creating a set using a list or a tuple
 more_primes = small_primes | bigger_primes # union operator
 print(more_primes)
 
@@ -21,3 +21,7 @@ print(intersection)
 
 difference = small_primes - bigger_primes # difference operator
 print(difference)
+
+# an easier way to create a set
+small_primes = {2, 3, 5, 5, 7}
+print(small_primes)
