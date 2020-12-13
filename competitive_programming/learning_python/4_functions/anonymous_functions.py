@@ -13,3 +13,14 @@ def get_multiples_of_five1(n):
 # using a lambda function
 def get_multiples_of_five(n):
     return list(filter(lambda k: not k % 5, range(n)))
+
+# more examples using lambda functions
+def adder(a, b):
+    return a + b
+
+adder_lambda = lambda a, b: a + b
+
+def to_upper(s):
+    return s.upper()
+
+upper_lambda = lambda s: s.upper()
